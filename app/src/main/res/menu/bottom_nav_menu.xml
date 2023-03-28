@@ -10,4 +10,9 @@
         android:icon="@drawable/ic_baseline_map_24"
         android:title="@string/title_map" />
 
+    <item
+        android:id="@+id/navigation_weapons"
+        android:icon="@drawable/ic_baseline_fire_extinguisher_24"
+        android:title="@string/title_weapon" />
+
 </menu>
