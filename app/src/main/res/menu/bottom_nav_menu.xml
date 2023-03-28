@@ -15,4 +15,10 @@
         android:icon="@drawable/ic_baseline_fire_extinguisher_24"
         android:title="@string/title_weapon" />
 
+    <item
+        android:id="@+id/navigation_skins"
+        android:icon="@drawable/ic_baseline_star_half_24"
+        android:title="@string/title_skin" />
+
+
 </menu>

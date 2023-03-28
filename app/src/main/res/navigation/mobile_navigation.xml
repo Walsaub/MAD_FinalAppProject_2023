@@ -19,4 +19,9 @@
         android:name="com.example.finalproject.UI.WeaponsFragment"
         android:label="@string/title_weapon"
         tools:layout="@layout/fragment_weapons" />
+    <fragment
+        android:id="@+id/navigation_skins"
+        android:name="com.example.finalproject.UI.SkinsFragment"
+        android:label="@string/title_skin"
+        tools:layout="@layout/fragment_skins" />
 </navigation>
