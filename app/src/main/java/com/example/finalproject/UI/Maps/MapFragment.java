@@ -61,10 +61,12 @@ public class MapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // separated the view from the return statement
         View view = inflater.inflate(R.layout.fragment_map, container, false);
+        // linked the text views to properties
         TextView mapName = view.findViewById(R.id.mapName);
         TextView mapDesc = view.findViewById(R.id.mapDescription);
+        // assigned the text of the text views to the parameters that we got from the adapter
         mapName.setText(mParam1);
         mapDesc.setText(mParam2);
 

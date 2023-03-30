@@ -16,7 +16,7 @@
         tools:layout="@layout/fragment_maps" />
     <fragment
         android:id="@+id/navigation_weapons"
-        android:name="com.example.finalproject.UI.WeaponsFragment"
+        android:name="com.example.finalproject.UI.Weapons.WeaponsFragment"
         android:label="@string/title_weapon"
         tools:layout="@layout/fragment_weapons" />
     <fragment

@@ -1,22 +1,22 @@
-package com.example.finalproject.UI.Maps;
+package com.example.finalproject.UI.Weapons;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.finalproject.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MapsFragment#newInstance} factory method to
+ * Use the {@link WeaponFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MapsFragment extends Fragment {
+public class WeaponFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +27,7 @@ public class MapsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public MapsFragment() {
+    public WeaponFragment() {
         // Required empty public constructor
     }
 
@@ -37,11 +37,11 @@ public class MapsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MapsFragment.
+     * @return A new instance of fragment WeaponFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MapsFragment newInstance(String param1, String param2) {
-        MapsFragment fragment = new MapsFragment();
+    public static WeaponFragment newInstance(String param1, String param2) {
+        WeaponFragment fragment = new WeaponFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -62,11 +62,14 @@ public class MapsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // separated the view from the return statement
-        View view = inflater.inflate(R.layout.fragment_maps, container, false);
-        // linked the viewPager2 to a property
-        ViewPager2 viewPager2 = view.findViewById(R.id.mapViewPager);
-        // set the viewPager2 adapter
-        viewPager2.setAdapter(new CustomViewPagerAdapter(getActivity()));
+        View view = inflater.inflate(R.layout.fragment_weapon, container, false);
+        // linked the text views to properties
+        TextView weaponName = view.findViewById(R.id.weaponName);
+        TextView weaponDesc = view.findViewById(R.id.weaponDescription);
+        // assigned the text of the text views to the parameters that we got from the adapter
+        weaponName.setText(mParam1);
+        weaponDesc.setText(mParam2);
+
         return view;
     }
 }

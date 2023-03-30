@@ -1,14 +1,16 @@
-package com.example.finalproject.UI;
+package com.example.finalproject.UI.Weapons;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.finalproject.R;
+import com.example.finalproject.UI.Maps.CustomViewPagerAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,7 +62,12 @@ public class WeaponsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_weapons, container, false);
+        // separated the view from the return statement
+        View view = inflater.inflate(R.layout.fragment_weapons, container, false);
+        // linked the viewPager2 to a property
+        ViewPager2 viewPager2 = view.findViewById(R.id.weaponViewPager);
+        // set the viewPager2 adapter
+        viewPager2.setAdapter(new CustomWeaponsViewPagerAdapter(getActivity()));
+        return view;
     }
 }
