@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -16,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.finalproject.R;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,12 +33,14 @@ public class WeaponFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "param3";
 
     Context context;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String mParam3;
 
     public WeaponFragment() {
         // Required empty public constructor
@@ -51,11 +55,12 @@ public class WeaponFragment extends Fragment {
      * @return A new instance of fragment WeaponFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WeaponFragment newInstance(String param1, String param2) {
+    public static WeaponFragment newInstance(String param1, String param2, String param3) {
         WeaponFragment fragment = new WeaponFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM3, param3);
         fragment.setArguments(args);
         return fragment;
     }
@@ -66,6 +71,7 @@ public class WeaponFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam3 = getArguments().getString(ARG_PARAM3);
         }
 
 
@@ -78,11 +84,14 @@ public class WeaponFragment extends Fragment {
         // linked the text views to properties
         TextView weaponName = view.findViewById(R.id.weaponName);
         TextView weaponDesc = view.findViewById(R.id.weaponDescription);
+        ImageView weaponDisplay = view.findViewById(R.id.weaponDisplay);
         // assigned the text of the text views to the parameters that we got from the adapter\
 
         weaponName.setText(mParam1);
         weaponDesc.setText(mParam2);
-
+        Picasso.get().load(mParam3).into(weaponDisplay);
         return view;
     }
+
+
 }

@@ -23,14 +23,11 @@ import java.util.ArrayList;
 
 public class CustomWeaponsViewPagerAdapter extends FragmentStateAdapter {
     ArrayList<Weapon> allWeapons = MainActivity.getAllWeapons();
-    Context context;
-    FragmentActivity f;
     //we need to collect the FragmentActivity because it is a FRAGMENT and
     //fragments have the getApplicationContext() property which allows us to get the context
     //which we use to use Volley.
     public CustomWeaponsViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
-        f = fragmentActivity;
     }
 
 
@@ -39,11 +36,14 @@ public class CustomWeaponsViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         for(int i = 0; i < allWeapons.size(); i++){
             if(position == i){
-                return WeaponFragment.newInstance(allWeapons.get(position).getName(), allWeapons.get(position).getCategory());
+                return WeaponFragment.newInstance(
+                        allWeapons.get(position).getName(),
+                        allWeapons.get(position).getCategory(),
+                        allWeapons.get(position).getDisplayIcon());
 
             }
         }
-        return WeaponFragment.newInstance("OPPS", "Something is wrong");
+        return WeaponFragment.newInstance("OPPS", "Something is wrong", "");
     }
 
 

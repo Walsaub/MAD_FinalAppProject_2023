@@ -71,12 +71,7 @@ public class MainActivity extends AppCompatActivity {
                                 gunData[i].getString("category"),
                                 gunData[i].getString("displayIcon")
                         );
-
                         allWeapons.add(w);
-
-
-
-                        //System.out.println("gunData[" + i + "] displayName: " + gunData[i].getString("displayName"));
                     }
 
                 }catch(Exception e) {
