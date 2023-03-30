@@ -1,14 +1,19 @@
-package com.example.finalproject.UI;
+package com.example.finalproject.UI.Agents;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.finalproject.R;
+import com.example.finalproject.pojo.Weapon;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,7 +65,21 @@ public class AgentsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_agents, container, false);
+        // separated the view from the return statement
+        View view = inflater.inflate(R.layout.fragment_agents, container, false);
+
+        //create an array list of Agent objects
+        ArrayList<Weapon> agentsList = new ArrayList<>();
+        //assign the kits list view to a variable
+        RecyclerView recyclerView = view.findViewById(R.id.agentsList);
+        //add new agent objects to the array
+        agentsList.add(new Weapon("Kay/o", "Initiator", "null"));
+        agentsList.add(new Weapon("Sova", "Initiator", "null"));
+        //create a new custom list view adapter and assign it to AgentsListView
+        AgentsCustomAdapter adapter = new AgentsCustomAdapter(agentsList);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        return view;
     }
 }
