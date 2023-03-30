@@ -1,4 +1,4 @@
-package com.example.finalproject.UI.Agents;
+package com.example.finalproject.UI.Skins;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,35 +9,36 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalproject.R;
+import com.example.finalproject.UI.Agents.AgentsCustomAdapter;
 import com.example.finalproject.pojo.Weapon;
 
 import java.util.ArrayList;
 
-public class AgentsCustomAdapter extends RecyclerView.Adapter<AgentsCustomAdapter.CustomViewHolder>{
+public class SkinsCustomAdapter extends RecyclerView.Adapter<SkinsCustomAdapter.CustomViewHolder>{
 
-    //arraylist to hold all the agents data
+    //arraylist to hold all the skins data
     private ArrayList<Weapon> weapons;
 
     //custom adapter constructor
-    public AgentsCustomAdapter(ArrayList<Weapon> weapons){
+    public SkinsCustomAdapter(ArrayList<Weapon> weapons){
         this.weapons = weapons;
     }
 
-    //method to create a new custom view holder for the agent view
+    //method to create a new custom view holder for the skin view
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.agent_view, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.skin_view, parent, false);
 
         return new CustomViewHolder(view);
     }
 
     //method to manipulate the content's of the view holder component
     @Override
-    public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SkinsCustomAdapter.CustomViewHolder holder, int position) {
         Weapon weapon = weapons.get(position);
-        holder.agentName.setText(weapon.getName());
-        holder.agentRole.setText(weapon.getCategory());
+        holder.skinName.setText(weapon.getName());
+        holder.skinCategory.setText(weapon.getCategory());
     }
 
     //determine how many agents we have
@@ -51,14 +52,14 @@ public class AgentsCustomAdapter extends RecyclerView.Adapter<AgentsCustomAdapte
 
 
     class CustomViewHolder extends RecyclerView.ViewHolder {
-        protected TextView agentName;
-        protected TextView agentRole;
+        protected TextView skinName;
+        protected TextView skinCategory;
 
         //method to bind the view holder component with the agent view component
         public CustomViewHolder(View view) {
             super(view);
-            this.agentName = view.findViewById(R.id.agentName);
-            this.agentRole = view.findViewById(R.id.agentRole);
+            this.skinName = view.findViewById(R.id.skinName);
+            this.skinCategory = view.findViewById(R.id.skinCategory);
         }
     }
 }

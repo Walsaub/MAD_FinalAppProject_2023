@@ -70,7 +70,7 @@ public class AgentsFragment extends Fragment {
 
         //create an array list of Agent objects
         ArrayList<Weapon> agentsList = new ArrayList<>();
-        //assign the kits list view to a variable
+        //assign the agents list Recycler View to a variable
         RecyclerView recyclerView = view.findViewById(R.id.agentsList);
         //add new agent objects to the array
         agentsList.add(new Weapon("Kay/o", "Initiator", "null"));

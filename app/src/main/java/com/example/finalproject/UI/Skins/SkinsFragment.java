@@ -1,14 +1,20 @@
-package com.example.finalproject.UI;
+package com.example.finalproject.UI.Skins;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.finalproject.R;
+import com.example.finalproject.UI.Agents.AgentsCustomAdapter;
+import com.example.finalproject.pojo.Weapon;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,7 +66,21 @@ public class SkinsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_skins, container, false);
+        // separated the view from the return statement
+        View view = inflater.inflate(R.layout.fragment_skins, container, false);
+
+        //create an array list of skin objects
+        ArrayList<Weapon> skinsList = new ArrayList<>();
+        //assign the skins list Recycler View to a variable
+        RecyclerView recyclerView = view.findViewById(R.id.skinsList);
+        //add new skin objects to the array
+        skinsList.add(new Weapon("Elder Flame", "It is dragon themed", "null"));
+        skinsList.add(new Weapon("Oni", "It is Oni (a ghost) themed", "null"));
+        //create a new custom list view adapter and assign it to SkinsListView
+        SkinsCustomAdapter adapter = new SkinsCustomAdapter(skinsList);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        return view;
     }
 }
