@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_agents" />
     <fragment
         android:id="@+id/navigation_maps"
-        android:name="com.example.finalproject.UI.MapsFragment"
+        android:name="com.example.finalproject.UI.Maps.MapsFragment"
         android:label="@string/title_map"
         tools:layout="@layout/fragment_maps" />
     <fragment
