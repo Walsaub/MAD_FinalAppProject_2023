@@ -6,7 +6,7 @@
     app:startDestination="@id/navigation_agents">
     <fragment
         android:id="@+id/navigation_agents"
-        android:name="com.example.finalproject.UI.AgentsFragment"
+        android:name="com.example.finalproject.UI.Agents.AgentsFragment"
         android:label="@string/title_agent"
         tools:layout="@layout/fragment_agents" />
     <fragment
@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_weapons" />
     <fragment
         android:id="@+id/navigation_skins"
-        android:name="com.example.finalproject.UI.SkinsFragment"
+        android:name="com.example.finalproject.UI.Skins.SkinsFragment"
         android:label="@string/title_skin"
         tools:layout="@layout/fragment_skins" />
 </navigation>

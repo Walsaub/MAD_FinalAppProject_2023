@@ -1,21 +1,27 @@
-package com.example.finalproject.UI;
+package com.example.finalproject.UI.Skins;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.finalproject.R;
+import com.example.finalproject.UI.Agents.AgentsCustomAdapter;
+import com.example.finalproject.pojo.Weapon;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AgentsFragment#newInstance} factory method to
+ * Use the {@link SkinsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AgentsFragment extends Fragment {
+public class SkinsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +32,7 @@ public class AgentsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AgentsFragment() {
+    public SkinsFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +42,11 @@ public class AgentsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AgentsFragment.
+     * @return A new instance of fragment SkinsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AgentsFragment newInstance(String param1, String param2) {
-        AgentsFragment fragment = new AgentsFragment();
+    public static SkinsFragment newInstance(String param1, String param2) {
+        SkinsFragment fragment = new SkinsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,7 +66,21 @@ public class AgentsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_agents, container, false);
+        // separated the view from the return statement
+        View view = inflater.inflate(R.layout.fragment_skins, container, false);
+
+        //create an array list of skin objects
+        ArrayList<Weapon> skinsList = new ArrayList<>();
+        //assign the skins list Recycler View to a variable
+        RecyclerView recyclerView = view.findViewById(R.id.skinsList);
+        //add new skin objects to the array
+        skinsList.add(new Weapon("Elder Flame", "It is dragon themed", "null"));
+        skinsList.add(new Weapon("Oni", "It is Oni (a ghost) themed", "null"));
+        //create a new custom list view adapter and assign it to SkinsListView
+        SkinsCustomAdapter adapter = new SkinsCustomAdapter(skinsList);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        return view;
     }
 }
