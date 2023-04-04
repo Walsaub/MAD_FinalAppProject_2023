@@ -8,26 +8,83 @@
     android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/weaponName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView"
-        android:textAlignment="center" />
-
-    <TextView
-        android:id="@+id/weaponDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView"
-        android:textAlignment="center" />
-
     <ImageView
         android:id="@+id/weaponDisplay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="3"
+        android:adjustViewBounds="true"
         tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/weaponName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/weapon_top_margin"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="@dimen/weapon_name_text_size" />
+
+    <TextView
+        android:id="@+id/weaponCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/weapon_top_margin"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="@dimen/weapon_status_text_size" />
+
+    <TextView
+        android:id="@+id/weaponCost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/weapon_top_margin"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="@dimen/weapon_status_text_size" />
+
+    <TextView
+        android:id="@+id/weaponFireRate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/weapon_top_margin"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="@dimen/weapon_status_text_size" />
+
+    <TextView
+        android:id="@+id/weaponMagazineSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/weapon_top_margin"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="@dimen/weapon_status_text_size" />
+
+    <TextView
+        android:id="@+id/weaponReloadTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/weapon_top_margin"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="@dimen/weapon_status_text_size" />
+
+    <TextView
+        android:id="@+id/weaponZoomMultiplier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/weapon_top_margin"
+        android:layout_marginBottom="@dimen/weapon_bottom_margin"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="@dimen/weapon_status_text_size" />
+
 </LinearLayout>

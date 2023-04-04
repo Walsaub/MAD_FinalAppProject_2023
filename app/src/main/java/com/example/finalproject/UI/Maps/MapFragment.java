@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.finalproject.R;
@@ -66,9 +67,13 @@ public class MapFragment extends Fragment {
         // linked the text views to properties
         TextView mapName = view.findViewById(R.id.mapName);
         TextView mapDesc = view.findViewById(R.id.mapDescription);
+        TextView mapCoordinates = view.findViewById(R.id.mapCoordinates);
+        ImageView mapImage = view.findViewById(R.id.mapImage);
         // assigned the text of the text views to the parameters that we got from the adapter
         mapName.setText(mParam1);
         mapDesc.setText(mParam2);
+        mapCoordinates.setText("N 1253");
+        mapImage.setImageResource(R.drawable.ic_launcher_background);
 
         return view;
     }
