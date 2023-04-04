@@ -2,4 +2,15 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <!--
+    map layout constraints and sizes
+    -->
+    <!--margins-->
+    <dimen name="map_name_top_margin">20dp</dimen>
+    <dimen name="map_desc_top_margin">25dp</dimen>
+    <dimen name="map_coordinates_top_margin">120dp</dimen>
+    <!--text size-->
+    <dimen name="map_name_text_size">40sp</dimen>
+    <dimen name="map_desc_text_size">25sp</dimen>
+    <dimen name="map_coordinates_text_size">30sp</dimen>
 </resources>
