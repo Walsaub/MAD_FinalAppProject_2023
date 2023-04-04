@@ -3,13 +3,13 @@ package com.example.finalproject.UI.Skins;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalproject.R;
-import com.example.finalproject.UI.Agents.AgentsCustomAdapter;
 import com.example.finalproject.pojo.Weapon;
 
 import java.util.ArrayList;
@@ -37,8 +37,10 @@ public class SkinsCustomAdapter extends RecyclerView.Adapter<SkinsCustomAdapter.
     @Override
     public void onBindViewHolder(@NonNull SkinsCustomAdapter.CustomViewHolder holder, int position) {
         Weapon weapon = weapons.get(position);
+        holder.skinImage.setImageResource(R.drawable.ic_launcher_foreground);
         holder.skinName.setText(weapon.getName());
         holder.skinCategory.setText(weapon.getCategory());
+        holder.skinPrice.setText("1200 VP");
     }
 
     //determine how many agents we have
@@ -52,14 +54,18 @@ public class SkinsCustomAdapter extends RecyclerView.Adapter<SkinsCustomAdapter.
 
 
     class CustomViewHolder extends RecyclerView.ViewHolder {
+        protected ImageView skinImage;
         protected TextView skinName;
         protected TextView skinCategory;
+        protected TextView skinPrice;
 
         //method to bind the view holder component with the agent view component
         public CustomViewHolder(View view) {
             super(view);
+            this.skinImage = view.findViewById(R.id.skinImage);
             this.skinName = view.findViewById(R.id.skinName);
-            this.skinCategory = view.findViewById(R.id.skinCategory);
+            this.skinCategory = view.findViewById(R.id.skinTier);
+            this.skinPrice = view.findViewById(R.id.skinPrice);
         }
     }
 }

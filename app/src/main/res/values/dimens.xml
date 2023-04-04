@@ -25,7 +25,7 @@
     <dimen name="weapon_status_text_size">20sp</dimen>
 
     <!--
-    weapon layout constraints and sizes
+    agent layout constraints and sizes
     -->
     <!--margins-->
     <dimen name="agent_name_top_margin">30dp</dimen>
@@ -35,5 +35,15 @@
     <dimen name="agent_name_text_size">25sp</dimen>
     <dimen name="agent_role_text_size">20sp</dimen>
     <dimen name="agent_role_image_size">30sp</dimen>
+
+    <!--
+    skin layout constraints and sizes
+    -->
+    <!--margins-->
+    <dimen name="skin_image_margin">5dp</dimen>
+    <dimen name="skin_status_margin">15dp</dimen>
+    <!--text size-->
+    <dimen name="skin_name_text_size">25sp</dimen>
+    <dimen name="skin_status_text_size">20sp</dimen>
 
 </resources>
