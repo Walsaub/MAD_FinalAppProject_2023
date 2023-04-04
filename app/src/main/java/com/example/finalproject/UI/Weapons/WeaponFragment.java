@@ -11,16 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.finalproject.R;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,14 +74,21 @@ public class WeaponFragment extends Fragment {
         // separated the view from the return statement
         View view = inflater.inflate(R.layout.fragment_weapon, container, false);
         // linked the text views to properties
-        TextView weaponName = view.findViewById(R.id.weaponName);
-        TextView weaponDesc = view.findViewById(R.id.weaponDescription);
-        ImageView weaponDisplay = view.findViewById(R.id.weaponDisplay);
-        // assigned the text of the text views to the parameters that we got from the adapter\
 
-        weaponName.setText(mParam1);
-        weaponDesc.setText(mParam2);
+        ImageView weaponDisplay = view.findViewById(R.id.weaponDisplay);
+        TextView weaponName = view.findViewById(R.id.weaponName);
+        TextView weaponCategory = view.findViewById(R.id.weaponCategory);
+        TextView weaponCost = view.findViewById(R.id.weaponCost);
+        TextView weaponFireRate = view.findViewById(R.id.weaponFireRate);
+        TextView weaponMagazineSize = view.findViewById(R.id.weaponMagazineSize);
+        TextView weaponReloadTime = view.findViewById(R.id.weaponReloadTime);
+        TextView weaponZoomMultiplier = view.findViewById(R.id.weaponZoomMultiplier);
+
+        // assigned the text of the text views to the parameters that we got from the adapter
+
         Picasso.get().load(mParam3).into(weaponDisplay);
+        weaponName.setText(mParam1);
+        weaponCategory.setText(mParam2);
         return view;
     }
 

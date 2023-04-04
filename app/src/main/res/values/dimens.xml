@@ -13,4 +13,15 @@
     <dimen name="map_name_text_size">40sp</dimen>
     <dimen name="map_desc_text_size">25sp</dimen>
     <dimen name="map_coordinates_text_size">30sp</dimen>
+
+    <!--
+    weapon layout constraints and sizes
+    -->
+    <!--margins-->
+    <dimen name="weapon_top_margin">5dp</dimen>
+    <dimen name="weapon_bottom_margin">60dp</dimen>
+    <!--text size-->
+    <dimen name="weapon_name_text_size">25sp</dimen>
+    <dimen name="weapon_status_text_size">20sp</dimen>
+
 </resources>
