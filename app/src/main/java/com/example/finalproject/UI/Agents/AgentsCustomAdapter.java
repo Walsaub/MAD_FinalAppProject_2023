@@ -3,6 +3,7 @@ package com.example.finalproject.UI.Agents;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,8 @@ public class AgentsCustomAdapter extends RecyclerView.Adapter<AgentsCustomAdapte
         Weapon weapon = weapons.get(position);
         holder.agentName.setText(weapon.getName());
         holder.agentRole.setText(weapon.getCategory());
+        holder.agentImage.setImageResource(R.drawable.ic_launcher_foreground);
+        holder.agentRoleImage.setImageResource(R.drawable.ic_baseline_fire_extinguisher_24);
     }
 
     //determine how many agents we have
@@ -54,11 +57,16 @@ public class AgentsCustomAdapter extends RecyclerView.Adapter<AgentsCustomAdapte
         protected TextView agentName;
         protected TextView agentRole;
 
+        protected ImageView agentImage;
+        protected ImageView agentRoleImage;
+
         //method to bind the view holder component with the agent view component
         public CustomViewHolder(View view) {
             super(view);
             this.agentName = view.findViewById(R.id.agentName);
             this.agentRole = view.findViewById(R.id.agentRole);
+            this.agentImage = view.findViewById(R.id.agentImage);
+            this.agentRoleImage = view.findViewById(R.id.roleImage);
         }
     }
 }

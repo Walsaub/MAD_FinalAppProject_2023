@@ -24,4 +24,16 @@
     <dimen name="weapon_name_text_size">25sp</dimen>
     <dimen name="weapon_status_text_size">20sp</dimen>
 
+    <!--
+    weapon layout constraints and sizes
+    -->
+    <!--margins-->
+    <dimen name="agent_name_top_margin">30dp</dimen>
+    <dimen name="agent_role_top_margin">10dp</dimen>
+    <dimen name="agent_name_left_margin">70dp</dimen>
+    <!--text size-->
+    <dimen name="agent_name_text_size">25sp</dimen>
+    <dimen name="agent_role_text_size">20sp</dimen>
+    <dimen name="agent_role_image_size">30sp</dimen>
+
 </resources>
