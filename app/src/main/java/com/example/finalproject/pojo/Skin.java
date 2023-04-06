@@ -17,17 +17,36 @@ public class Skin implements Parcelable {
      * @param skinImage
      * @param skinName
      * @param skinTier
-     * @param skinPrice
      *
      * @date 4/6/2023
      * @description DB constructor for the skin class
      */
-    public Skin(int id, String skinImage, String skinName, String skinTier, int skinPrice) {
+    public Skin(int id, String skinImage, String skinName, String skinTier) {
         this.id = id;
         this.skinImage = skinImage;
         this.skinName = skinName;
         this.skinTier = skinTier;
-        this.skinPrice = skinPrice;
+        switch (this.skinTier){
+            case "Select":
+                this.skinPrice = 875;
+                break;
+            case "Deluxe":
+                this.skinPrice = 1275;
+                break;
+            case "Premium":
+                this.skinPrice = 1775;
+                break;
+            case "Ultra":
+                this.skinPrice = 2475;
+                break;
+            case "Exclusive":
+                this.skinPrice = 2500;
+                break;
+            default:
+                this.skinPrice = 0;
+                break;
+        }
+
     }
 
     /**
@@ -36,16 +55,34 @@ public class Skin implements Parcelable {
      * @param skinImage
      * @param skinName
      * @param skinTier
-     * @param skinPrice
      *
      * @date 4/6/2023
      * @description regular constructor for the skin class
      */
-    public Skin(String skinImage, String skinName, String skinTier, int skinPrice) {
+    public Skin(String skinImage, String skinName, String skinTier) {
         this.skinImage = skinImage;
         this.skinName = skinName;
         this.skinTier = skinTier;
-        this.skinPrice = skinPrice;
+        switch (this.skinTier){
+            case "Select":
+                this.skinPrice = 875;
+                break;
+            case "Deluxe":
+                this.skinPrice = 1275;
+                break;
+            case "Premium":
+                this.skinPrice = 1775;
+                break;
+            case "Ultra":
+                this.skinPrice = 2475;
+                break;
+            case "Exclusive":
+                this.skinPrice = 2500;
+                break;
+            default:
+                this.skinPrice = 0;
+                break;
+        }
     }
 
     /**

@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<Skin> getAllSkins(){
         return allSkins;
     }
+
+    //content tier
+    HashMap<String, String> allTiers = new HashMap<String, String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
                     for(int i = 0; i < allDATA.length(); i++){
 
                         gunData[i] = allDATA.getJSONObject(i);
-                        System.out.println("gun data[i]: " + gunData[i]);
 
                         /** CHECK IF SHOPDATA EXISTS **/
                         int price;
@@ -156,6 +159,38 @@ public class MainActivity extends AppCompatActivity {
         //JSON object request #2 ~ Skins
         String skinsURL = "https://valorant-api.com/v1/weapons/skins";
         String contenttiersURL = "https://valorant-api.com/v1/contenttiers";
+
+        JsonObjectRequest tierRequest = new JsonObjectRequest(Request.Method.GET, contenttiersURL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try{
+                    //2. allDATA is a collection of EVERY gun
+                    JSONArray allDATA = response.getJSONArray("data");
+
+                    //3. gunData is all data for each specific gun (18 total)
+                    JSONObject[] tierData = new JSONObject[allDATA.length()];
+
+                    //collect JSONObject data for each gun
+                    for(int i = 0; i < allDATA.length(); i++){
+                        tierData[i] = allDATA.getJSONObject(i); //retrieve individual skin data
+
+                        allTiers.put(tierData[i].getString("uuid"), tierData[i].getString("devName"));
+
+                    }
+
+                }catch(Exception e) {
+                    System.out.println("Failed to collect JSON data.");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        Volley.newRequestQueue(this).add(tierRequest);
+
+
         JsonObjectRequest skinRequest = new JsonObjectRequest(Request.Method.GET, skinsURL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -169,14 +204,20 @@ public class MainActivity extends AppCompatActivity {
                     //collect JSONObject data for each gun
                     for(int i = 0; i < allDATA.length(); i++){
                         skinData[i] = allDATA.getJSONObject(i); //retrieve individual skin data
+                        JSONArray chromasData = skinData[i].getJSONArray("chromas");
+                        JSONObject x = chromasData.getJSONObject(0);
 
-                        System.out.println(skinData[i].getString("displayName"));
+                        String tier = "";
+                        if(skinData[i].isNull("contentTierUuid")){
+                            tier = "Select";
+                        }else{
+                            tier = allTiers.get(skinData[i].getString("contentTierUuid"));
+                        }
 
                         Skin s = new Skin(
-                                skinData[i].getString("displayIcon"),
+                                x.getString("fullRender"),
                                 skinData[i].getString("displayName"),
-                                "",
-                                0
+                                tier
                         );
                         allSkins.add(s);
                     }
