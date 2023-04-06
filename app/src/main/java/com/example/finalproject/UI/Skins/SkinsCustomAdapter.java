@@ -10,18 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalproject.R;
+import com.example.finalproject.pojo.Skin;
 import com.example.finalproject.pojo.Weapon;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class SkinsCustomAdapter extends RecyclerView.Adapter<SkinsCustomAdapter.CustomViewHolder>{
 
     //arraylist to hold all the skins data
-    private ArrayList<Weapon> weapons;
+    private ArrayList<Skin> skins;
 
     //custom adapter constructor
-    public SkinsCustomAdapter(ArrayList<Weapon> weapons){
-        this.weapons = weapons;
+    public SkinsCustomAdapter(ArrayList<Skin> skins){
+        this.skins = skins;
     }
 
     //method to create a new custom view holder for the skin view
@@ -36,18 +38,19 @@ public class SkinsCustomAdapter extends RecyclerView.Adapter<SkinsCustomAdapter.
     //method to manipulate the content's of the view holder component
     @Override
     public void onBindViewHolder(@NonNull SkinsCustomAdapter.CustomViewHolder holder, int position) {
-        Weapon weapon = weapons.get(position);
-        holder.skinImage.setImageResource(R.drawable.ic_launcher_foreground);
-        holder.skinName.setText(weapon.getName());
-        holder.skinCategory.setText(weapon.getCategory());
-        holder.skinPrice.setText("1200 VP");
+        Skin skin = skins.get(position);
+        holder.skinName.setText(skin.getSkinName());
+        holder.skinCategory.setText(skin.getSkinTier());
+        holder.skinPrice.setText(skin.getSkinPrice());
+        Picasso.get().load(skin.getSkinImage()).into(holder.skinImage);
+
     }
 
     //determine how many agents we have
     @Override
     public int getItemCount() {
-        if (weapons != null){
-            return weapons.size();
+        if (skins != null){
+            return skins.size();
         }
         return 0;
     }

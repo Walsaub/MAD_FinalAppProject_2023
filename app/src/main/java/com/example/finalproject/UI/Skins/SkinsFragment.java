@@ -10,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.finalproject.MainActivity;
 import com.example.finalproject.R;
 import com.example.finalproject.UI.Agents.AgentsCustomAdapter;
+import com.example.finalproject.pojo.Skin;
 import com.example.finalproject.pojo.Weapon;
 
 import java.util.ArrayList;
@@ -70,13 +72,15 @@ public class SkinsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_skins, container, false);
 
         //create an array list of skin objects
-        ArrayList<Weapon> skinsList = new ArrayList<>();
+        ArrayList<Skin> skinsList = MainActivity.getAllSkins();
         //assign the skins list Recycler View to a variable
         RecyclerView recyclerView = view.findViewById(R.id.skinsList);
         //add new skin objects to the array
 //        skinsList.add(new Weapon("Elder Flame", "It is dragon themed", "null"));
 //        skinsList.add(new Weapon("Oni", "It is Oni (a ghost) themed", "null"));
         //create a new custom list view adapter and assign it to SkinsListView
+
+
         SkinsCustomAdapter adapter = new SkinsCustomAdapter(skinsList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

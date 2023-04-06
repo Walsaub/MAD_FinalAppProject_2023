@@ -7,6 +7,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.finalproject.pojo.Skin;
 import com.example.finalproject.pojo.Weapon;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -33,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
         return allWeapons;
     }
 
+    //skins
+    static ArrayList<Skin> allSkins = new ArrayList<Skin>();
+    public static ArrayList<Skin> getAllSkins(){
+        return allSkins;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         //1. Request JSON data
-        String url = "https://valorant-api.com/v1/weapons/";
+        String weaponsURL = "https://valorant-api.com/v1/weapons/";
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest gunRequest = new JsonObjectRequest(Request.Method.GET, weaponsURL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try{
@@ -144,7 +151,47 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        Volley.newRequestQueue(this).add(request);
+        Volley.newRequestQueue(this).add(gunRequest);
+
+        //JSON object request #2 ~ Skins
+        String skinsURL = "https://valorant-api.com/v1/weapons/skins";
+        String contenttiersURL = "https://valorant-api.com/v1/contenttiers";
+        JsonObjectRequest skinRequest = new JsonObjectRequest(Request.Method.GET, skinsURL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try{
+                    //2. allDATA is a collection of EVERY gun
+                    JSONArray allDATA = response.getJSONArray("data");
+
+                    //3. gunData is all data for each specific gun (18 total)
+                    JSONObject[] skinData = new JSONObject[allDATA.length()];
+
+                    //collect JSONObject data for each gun
+                    for(int i = 0; i < allDATA.length(); i++){
+                        skinData[i] = allDATA.getJSONObject(i); //retrieve individual skin data
+
+                        System.out.println(skinData[i].getString("displayName"));
+
+                        Skin s = new Skin(
+                                skinData[i].getString("displayIcon"),
+                                skinData[i].getString("displayName"),
+                                "",
+                                0
+                        );
+                        allSkins.add(s);
+                    }
+
+                }catch(Exception e) {
+                    System.out.println("Failed to collect JSON data.");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        Volley.newRequestQueue(this).add(skinRequest);
 
     }
 

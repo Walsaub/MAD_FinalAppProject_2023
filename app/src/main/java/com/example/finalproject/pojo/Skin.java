@@ -129,8 +129,8 @@ public class Skin implements Parcelable {
      * @date 4/6/2023
      * @return returns the skin price
      */
-    public int getSkinPrice() {
-        return skinPrice;
+    public String getSkinPrice() {
+        return ""+skinPrice;
     }
 
     /**
