@@ -65,21 +65,73 @@ public class MainActivity extends AppCompatActivity {
 
                     //collect JSONObject data for each gun
                     for(int i = 0; i < allDATA.length(); i++){
+
                         gunData[i] = allDATA.getJSONObject(i);
-                        JSONObject shopData = gunData[i].getJSONObject("shopData");
-                        JSONObject weaponData = gunData[i].getJSONObject("weaponStats");
-                        JSONObject adsData = weaponData.getJSONObject("adsStats");
+                        System.out.println("gun data[i]: " + gunData[i]);
+
+                        /** CHECK IF SHOPDATA EXISTS **/
+                        int price;
+                        String category;
+                        JSONObject shopData;
+                        if(gunData[i].isNull("shopData")){
+                            price = 0;
+                            category = "Melee";
+                        }else{
+                            shopData = gunData[i].getJSONObject("shopData");
+                            price = shopData.getInt("cost");
+                            category = shopData.getString("category");
+                        }
+
+
+                        /** CHECK IF WEAPONDATA EXISTS **/
+                        Double fireRate;
+                        int magazineSize;
+                        Double reloadTime;
+                        Double zooMultplier;
+
+                        JSONObject weaponData;
+                        JSONObject adsData;
+
+
+                        //check weaponData first
+                        if(gunData[i].isNull("weaponStats")){
+                            //if it doesn't have a gun, it won't have gun-related stats.
+                            fireRate = 0.0;
+                            magazineSize = 0;
+                            reloadTime = 0.0;
+                            zooMultplier = 0.0;
+                        }else{  //if gun data DOES exist
+                            //if adsStats is NOT null, read the data and put inside weaponData
+                            weaponData = gunData[i].getJSONObject("weaponStats");
+
+                            fireRate = weaponData.getDouble("fireRate");
+                            magazineSize = weaponData.getInt("magazineSize");
+                            reloadTime = weaponData.getDouble("reloadTimeSeconds");
+
+                            //now, we need to check if ads data exists inside of specific weapon.
+                            if(weaponData.isNull("adsStats")){
+                                zooMultplier = 0.0;
+                            }else{
+                                //if adsStats is NOT null, read the data and put inside adsData
+                                adsData = weaponData.getJSONObject("adsStats");
+                                zooMultplier =  adsData.getDouble("zoomMultiplier");
+                            }
+                        }
+
+
+
                         Weapon w = new Weapon(
                                 gunData[i].getString("displayName"),
-                                shopData.getString("category"),
+                                category,
                                 gunData[i].getString("displayIcon"),
-                                shopData.getInt("cost"),
-                                weaponData.getDouble("fireRate"),
-                                weaponData.getInt("magazineSize"),
-                                weaponData.getDouble("reloadTimeSeconds"),
-                                adsData.getDouble("zoomMultiplier")
+                                price,
+                                fireRate,
+                                magazineSize,
+                                reloadTime,
+                                zooMultplier
                         );
                         allWeapons.add(w);
+
                     }
 
                 }catch(Exception e) {

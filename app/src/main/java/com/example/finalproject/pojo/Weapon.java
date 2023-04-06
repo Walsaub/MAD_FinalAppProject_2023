@@ -51,13 +51,13 @@ public class Weapon implements Parcelable {
     public void setDisplayIcon(String displayIcon) {this.displayIcon = displayIcon;}
     public String getWeaponCost() {return "Cost: " + weaponCost;}
     public void setWeaponCost(int weaponCost) {this.weaponCost = weaponCost;}
-    public String getFireRate() {return "Fire Rate: "+fireRate;}
+    public String getFireRate() {return this.fireRate == 0 ? "Fire Rate: N/A" : "Fire Rate: "+fireRate;}
     public void setFireRate(double fireRate) {this.fireRate = fireRate;}
-    public String getMagazineSize() {return "Magazine Size: "+magazineSize;}
+    public String getMagazineSize() {return this.magazineSize == 0 ? "Magazine Size: N/A" : "Magazine Size: "+magazineSize;}
     public void setMagazineSize(int magazineSize) {this.magazineSize = magazineSize;}
-    public String getReloadTime() {return "Reload Time: "+reloadTime + " seconds";}
+    public String getReloadTime() {return this.reloadTime == 0 ? "Reload Time: N/A" : "Reload Time: "+reloadTime + " seconds";}
     public void setReloadTime(double reloadTime) {this.reloadTime = reloadTime;}
-    public String getZoomMultipier() {return "Zoom Multiplier: "+zoomMultipier;}
+    public String getZoomMultipier() {return this.zoomMultipier == 0 ? "You can't ADS with this weapon." : "Zoom Multiplier: "+zoomMultipier;}
     public void setZoomMultipier(double zoomMultipier) {this.zoomMultipier = zoomMultipier;}
 
 
