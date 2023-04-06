@@ -39,11 +39,16 @@ public class CustomWeaponsViewPagerAdapter extends FragmentStateAdapter {
                 return WeaponFragment.newInstance(
                         allWeapons.get(position).getName(),
                         allWeapons.get(position).getCategory(),
-                        allWeapons.get(position).getDisplayIcon());
+                        allWeapons.get(position).getDisplayIcon(),
+                        allWeapons.get(position).getWeaponCost(),
+                        allWeapons.get(position).getFireRate(),
+                        allWeapons.get(position).getMagazineSize(),
+                        allWeapons.get(position).getReloadTime(),
+                        allWeapons.get(position).getZoomMultipier());
 
             }
         }
-        return WeaponFragment.newInstance("OPPS", "Something is wrong", "");
+        return WeaponFragment.newInstance("Oops", "Something is wrong", "","","","","","");
     }
 
 

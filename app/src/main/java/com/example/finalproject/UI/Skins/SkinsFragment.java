@@ -74,8 +74,8 @@ public class SkinsFragment extends Fragment {
         //assign the skins list Recycler View to a variable
         RecyclerView recyclerView = view.findViewById(R.id.skinsList);
         //add new skin objects to the array
-        skinsList.add(new Weapon("Elder Flame", "It is dragon themed", "null"));
-        skinsList.add(new Weapon("Oni", "It is Oni (a ghost) themed", "null"));
+//        skinsList.add(new Weapon("Elder Flame", "It is dragon themed", "null"));
+//        skinsList.add(new Weapon("Oni", "It is Oni (a ghost) themed", "null"));
         //create a new custom list view adapter and assign it to SkinsListView
         SkinsCustomAdapter adapter = new SkinsCustomAdapter(skinsList);
         recyclerView.setAdapter(adapter);

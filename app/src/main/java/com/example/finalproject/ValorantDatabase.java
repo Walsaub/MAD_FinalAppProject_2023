@@ -66,7 +66,12 @@ public class ValorantDatabase extends SQLiteOpenHelper {
                     cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getString(2),
-                    cursor.getString(3));
+                    cursor.getString(3),
+                    cursor.getInt(4),
+                    cursor.getDouble(5),
+                    cursor.getInt(6),
+                    cursor.getDouble(7),
+                    cursor.getDouble(8));
         }
         db.close();
         return weapon;
@@ -82,7 +87,12 @@ public class ValorantDatabase extends SQLiteOpenHelper {
                     cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getString(2),
-                    cursor.getString(3)));
+                    cursor.getString(3),
+                    cursor.getInt(4),
+                    cursor.getDouble(5),
+                    cursor.getInt(6),
+                    cursor.getDouble(7),
+                    cursor.getDouble(8)));
         }
         db.close();
         return weapons;

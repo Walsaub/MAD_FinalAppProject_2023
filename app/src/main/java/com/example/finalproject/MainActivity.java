@@ -66,10 +66,18 @@ public class MainActivity extends AppCompatActivity {
                     //collect JSONObject data for each gun
                     for(int i = 0; i < allDATA.length(); i++){
                         gunData[i] = allDATA.getJSONObject(i);
+                        JSONObject shopData = gunData[i].getJSONObject("shopData");
+                        JSONObject weaponData = gunData[i].getJSONObject("weaponStats");
+                        JSONObject adsData = weaponData.getJSONObject("adsStats");
                         Weapon w = new Weapon(
                                 gunData[i].getString("displayName"),
-                                gunData[i].getString("category"),
-                                gunData[i].getString("displayIcon")
+                                shopData.getString("category"),
+                                gunData[i].getString("displayIcon"),
+                                shopData.getInt("cost"),
+                                weaponData.getDouble("fireRate"),
+                                weaponData.getInt("magazineSize"),
+                                weaponData.getDouble("reloadTimeSeconds"),
+                                adsData.getDouble("zoomMultiplier")
                         );
                         allWeapons.add(w);
                     }

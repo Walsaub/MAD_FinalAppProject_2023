@@ -8,28 +8,58 @@ public class Weapon implements Parcelable {
     private String name;
     private String category;
     private String displayIcon;
+    private int weaponCost;
+    private double fireRate;
+    private int magazineSize;
+    private double reloadTime;
+    private double zoomMultipier;
+
     //weapon stats array of type String, Int
-    public Weapon(String name, String category, String displayIcon){
+
+
+    public Weapon(String name, String category, String displayIcon, int weaponCost, double fireRate, int magazineSize, double reloadTime, double zoomMultipier) {
         this.name = name;
         this.category = category;
         this.displayIcon = displayIcon;
+        this.weaponCost = weaponCost;
+        this.fireRate = fireRate;
+        this.magazineSize = magazineSize;
+        this.reloadTime = reloadTime;
+        this.zoomMultipier = zoomMultipier;
     }
 
     //DB Weapon
-    public Weapon(int id, String name, String category, String displayIcon){
+
+
+    public Weapon(int id, String name, String category, String displayIcon, int weaponCost, double fireRate, int magazineSize, double reloadTime, double zoomMultipier) {
         this.id = id;
         this.name = name;
         this.category = category;
         this.displayIcon = displayIcon;
+        this.weaponCost = weaponCost;
+        this.fireRate = fireRate;
+        this.magazineSize = magazineSize;
+        this.reloadTime = reloadTime;
+        this.zoomMultipier = zoomMultipier;
     }
-
 
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
-    public String getCategory() {return category;}
+    public String getCategory() {return "Category: " + category;}
     public void setCategory(String category) {this.category = category;}
     public String getDisplayIcon() {return displayIcon;}
     public void setDisplayIcon(String displayIcon) {this.displayIcon = displayIcon;}
+    public String getWeaponCost() {return "Cost: " + weaponCost;}
+    public void setWeaponCost(int weaponCost) {this.weaponCost = weaponCost;}
+    public String getFireRate() {return "Fire Rate: "+fireRate;}
+    public void setFireRate(double fireRate) {this.fireRate = fireRate;}
+    public String getMagazineSize() {return "Magazine Size: "+magazineSize;}
+    public void setMagazineSize(int magazineSize) {this.magazineSize = magazineSize;}
+    public String getReloadTime() {return "Reload Time: "+reloadTime + " seconds";}
+    public void setReloadTime(double reloadTime) {this.reloadTime = reloadTime;}
+    public String getZoomMultipier() {return "Zoom Multiplier: "+zoomMultipier;}
+    public void setZoomMultipier(double zoomMultipier) {this.zoomMultipier = zoomMultipier;}
+
 
     @Override
     public int describeContents() {

@@ -73,8 +73,8 @@ public class AgentsFragment extends Fragment {
         //assign the agents list Recycler View to a variable
         RecyclerView recyclerView = view.findViewById(R.id.agentsList);
         //add new agent objects to the array
-        agentsList.add(new Weapon("Kay/o", "Initiator", "null"));
-        agentsList.add(new Weapon("Sova", "Initiator", "null"));
+//        agentsList.add(new Weapon("Kay/o", "Initiator", "null"));
+//        agentsList.add(new Weapon("Sova", "Initiator", "null"));
         //create a new custom list view adapter and assign it to AgentsListView
         AgentsCustomAdapter adapter = new AgentsCustomAdapter(agentsList);
         recyclerView.setAdapter(adapter);
