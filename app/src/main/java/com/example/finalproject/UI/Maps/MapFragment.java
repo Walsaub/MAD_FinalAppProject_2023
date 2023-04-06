@@ -1,4 +1,4 @@
-package com.example.finalproject.UI;
+package com.example.finalproject.UI.Maps;
 
 import android.os.Bundle;
 
@@ -7,15 +7,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.finalproject.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AgentsFragment#newInstance} factory method to
+ * Use the {@link MapFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AgentsFragment extends Fragment {
+public class MapFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +28,7 @@ public class AgentsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AgentsFragment() {
+    public MapFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +38,11 @@ public class AgentsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AgentsFragment.
+     * @return A new instance of fragment MapFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AgentsFragment newInstance(String param1, String param2) {
-        AgentsFragment fragment = new AgentsFragment();
+    public static MapFragment newInstance(String param1, String param2) {
+        MapFragment fragment = new MapFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,7 +62,19 @@ public class AgentsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_agents, container, false);
+        // separated the view from the return statement
+        View view = inflater.inflate(R.layout.fragment_map, container, false);
+        // linked the text views to properties
+        TextView mapName = view.findViewById(R.id.mapName);
+        TextView mapDesc = view.findViewById(R.id.mapDescription);
+        TextView mapCoordinates = view.findViewById(R.id.mapCoordinates);
+        ImageView mapImage = view.findViewById(R.id.mapImage);
+        // assigned the text of the text views to the parameters that we got from the adapter
+        mapName.setText(mParam1);
+        mapDesc.setText(mParam2);
+        mapCoordinates.setText("N 1253");
+        mapImage.setImageResource(R.drawable.ic_launcher_background);
+
+        return view;
     }
 }
