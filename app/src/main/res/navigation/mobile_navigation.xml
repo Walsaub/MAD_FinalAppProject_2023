@@ -8,7 +8,11 @@
         android:id="@+id/navigation_agents"
         android:name="com.example.finalproject.UI.Agents.AgentsFragment"
         android:label="@string/title_agent"
-        tools:layout="@layout/fragment_agents" />
+        tools:layout="@layout/fragment_agents" >
+        <action
+            android:id="@+id/action_navigation_agents_to_detailedAgentFragment"
+            app:destination="@id/detailedAgentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_maps"
         android:name="com.example.finalproject.UI.Maps.MapsFragment"
@@ -24,4 +28,9 @@
         android:name="com.example.finalproject.UI.Skins.SkinsFragment"
         android:label="@string/title_skin"
         tools:layout="@layout/fragment_skins" />
+    <fragment
+        android:id="@+id/detailedAgentFragment"
+        android:name="com.example.finalproject.UI.Agents.DetailedAgentFragment"
+        android:label="@string/title_agent_detailed"
+        tools:layout="@layout/fragment_detailed_agent" />
 </navigation>

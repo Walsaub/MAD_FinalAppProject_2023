@@ -1,5 +1,6 @@
 package com.example.finalproject.UI.Agents;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalproject.R;
@@ -43,6 +45,16 @@ public class AgentsCustomAdapter extends RecyclerView.Adapter<AgentsCustomAdapte
         holder.agentRole.setText(agent.getAgentRole());
         Picasso.get().load(agent.getAgentIcon()).into(holder.agentImage);
         Picasso.get().load(agent.getRoleImage()).into(holder.agentRoleImage);
+        //when the user clicks on an agent he will be navigated to a detailed view of that agent
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle extra = new Bundle();
+                extra.putParcelable(DetailedAgentFragment.AGENT,
+                        agents.get(holder.getAdapterPosition()));
+                Navigation.findNavController(view).navigate(R.id.detailedAgentFragment, extra);
+            }
+        });
     }
 
     //determine how many agents we have
