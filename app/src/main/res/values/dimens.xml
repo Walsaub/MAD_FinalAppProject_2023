@@ -23,6 +23,8 @@
     <!--text size-->
     <dimen name="weapon_name_text_size">25sp</dimen>
     <dimen name="weapon_status_text_size">20sp</dimen>
+    <!--image size-->
+    <dimen name="weapon_image_height">150sp</dimen>
 
     <!--
     agent layout constraints and sizes
@@ -34,7 +36,9 @@
     <!--text size-->
     <dimen name="agent_name_text_size">25sp</dimen>
     <dimen name="agent_role_text_size">20sp</dimen>
+    <!--image size-->
     <dimen name="agent_role_image_size">30sp</dimen>
+    <dimen name="agent_image_size">150sp</dimen>
 
     <!--
     skin layout constraints and sizes
