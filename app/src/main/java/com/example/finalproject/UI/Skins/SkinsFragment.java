@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.finalproject.MainActivity;
 import com.example.finalproject.R;
 import com.example.finalproject.UI.Agents.AgentsCustomAdapter;
+import com.example.finalproject.ValorantDatabase;
 import com.example.finalproject.pojo.Skin;
 import com.example.finalproject.pojo.Weapon;
 
@@ -24,7 +25,6 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class SkinsFragment extends Fragment {
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -72,8 +72,9 @@ public class SkinsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_skins, container, false);
 
         //create an array list of skin objects
-        ArrayList<Skin> skinsList = MainActivity.getAllSkins();
+        ArrayList<Skin> skinsList = new ValorantDatabase(getContext()).getAllSkins();
         //assign the skins list Recycler View to a variable
+
         RecyclerView recyclerView = view.findViewById(R.id.skinsList);
         //add new skin objects to the array
 //        skinsList.add(new Weapon("Elder Flame", "It is dragon themed", "null"));

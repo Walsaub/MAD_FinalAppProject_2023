@@ -9,6 +9,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.example.finalproject.pojo.Skin;
 import com.example.finalproject.pojo.Weapon;
 
 import java.util.ArrayList;
@@ -41,6 +42,20 @@ public class ValorantDatabase extends SQLiteOpenHelper {
             + COLUMN_WEAPON_RELOADTIME + " REAL, "
             + COLUMN_WEAPON_ZOOMMULTIPLIER + " REAL)";
 
+    public static final String TABLE_SKIN = "skin";
+    public static final String COLUMN_SKIN_ID = "id";
+    public static final String COLUMN_SKIN_IMAGE = "skinImage";
+    public static final String COLUMN_SKIN_NAME = "skinName";
+    public static final String COLUMN_SKIN_TIER = "skinTier";
+    public static final String COLUMN_SKIN_SKINPRICE = "skinPrice";
+
+    public static final String CREATE_SKINS_TABLE = "CREATE TABLE " +
+            TABLE_SKIN + "(" + COLUMN_SKIN_ID + " INTEGER PRIMARY KEY, "
+            + COLUMN_SKIN_IMAGE + " TEXT, "
+            + COLUMN_SKIN_NAME + " TEXT, "
+            + COLUMN_SKIN_TIER + " TEXT, "
+            + COLUMN_SKIN_SKINPRICE + " BLOB)";
+
     public ValorantDatabase(@Nullable Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -49,6 +64,7 @@ public class ValorantDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_WEAPONS_TABLE);
+        db.execSQL(CREATE_SKINS_TABLE);
     }
 
     @Override
@@ -68,6 +84,18 @@ public class ValorantDatabase extends SQLiteOpenHelper {
         db.insert(TABLE_WEAPON, null, values);
         db.close();
         Log.d("SQL", "Weapon Added");
+    }
+
+    public void addSkin(Skin skin){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_SKIN_IMAGE, skin.getSkinImage());
+        values.put(COLUMN_SKIN_NAME, skin.getSkinName());
+        values.put(COLUMN_SKIN_TIER, skin.getSkinTier());
+        values.put(COLUMN_SKIN_SKINPRICE, skin.getSkinPrice());
+        db.insert(TABLE_SKIN, null, values);
+        db.close();
+        Log.d("SQL", "Skin Added");
     }
 
     public Weapon getWeapon(int id){
@@ -114,6 +142,23 @@ public class ValorantDatabase extends SQLiteOpenHelper {
         }
         db.close();
         return weapons;
+    }
+
+    public ArrayList<Skin> getAllSkins(){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        ArrayList<Skin> skins = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_SKIN, null);
+        Log.d("SQL", "Skin Table: " + cursor.getCount() + " records");
+        while(cursor.moveToNext()){
+            skins.add(new Skin(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3)));
+        }
+        db.close();
+        return skins;
     }
 
 
