@@ -8,7 +8,7 @@
     <!--margins-->
     <dimen name="map_name_top_margin">20dp</dimen>
     <dimen name="map_desc_top_margin">25dp</dimen>
-    <dimen name="map_coordinates_top_margin">120dp</dimen>
+    <dimen name="map_coordinates_bottom_margin">70dp</dimen>
     <!--text size-->
     <dimen name="map_name_text_size">40sp</dimen>
     <dimen name="map_desc_text_size">25sp</dimen>

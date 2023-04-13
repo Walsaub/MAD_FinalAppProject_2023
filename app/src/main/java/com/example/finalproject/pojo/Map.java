@@ -27,7 +27,7 @@ public class Map implements Parcelable {
         this.mapName = mapName;
         this.mapCoordinates = mapCoordinates;
 
-        if (this.mapName == "Haven" || this.mapName == "haven" || this.mapName == "Lotus" || this.mapName == "lotus"){
+        if (this.mapName.trim().equals("Haven") || this.mapName.trim().equals("Lotus")){
             this.mapDescription = "This map has 3 sites";
         } else {
             this.mapDescription = "This map has 2 sites";
@@ -47,7 +47,7 @@ public class Map implements Parcelable {
         this.mapName = mapName;
         this.mapCoordinates = mapCoordinates;
 
-        if (this.mapName == "Haven" || this.mapName == "haven" || this.mapName == "Lotus" || this.mapName == "lotus"){
+        if (this.mapName.trim().equals("Haven") || this.mapName.trim().equals("Lotus")){
             this.mapDescription = "This map has 3 sites";
         } else {
             this.mapDescription = "This map has 2 sites";

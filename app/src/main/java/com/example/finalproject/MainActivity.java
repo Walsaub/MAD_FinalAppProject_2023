@@ -7,6 +7,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.finalproject.pojo.Map;
 import com.example.finalproject.pojo.Skin;
 import com.example.finalproject.pojo.Weapon;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -43,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
 
     //content tier
     HashMap<String, String> allTiers = new HashMap<String, String>();
+    //array list to hold all the maps
+    static ArrayList<Map> allMaps = new ArrayList<Map>();
+
+    /**
+     * @author wissam al saub
+     * @date 4/13/2023
+     * @return returns an array list with all the map retrieved
+     */
+    public static ArrayList<Map> getAllMaps(){return allMaps;}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -233,6 +243,43 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         Volley.newRequestQueue(this).add(skinRequest);
+
+        /**
+         * @author wissam al saub
+         * @date 4/13/2023
+         *
+         * requesting the map data from Valorant API
+         */
+        String mapURL = "https://valorant-api.com/v1/maps";
+
+        JsonObjectRequest mapsRequest = new JsonObjectRequest(Request.Method.GET, mapURL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    //get all the map and store them in a json array
+                    JSONArray maps = response.getJSONArray("data");
+
+                    //loop through the json array to create a new map object from the fetched data
+                    for (int i = 0; i < maps.length(); i++){
+                        Map map = new Map(
+                                maps.getJSONObject(i).getString("splash"),
+                                maps.getJSONObject(i).getString("displayName"),
+                                maps.getJSONObject(i).getString("coordinates")
+                        );
+                        allMaps.add(map);
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("Failed to collect map's JSON data");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        Volley.newRequestQueue(this).add(mapsRequest);
 
     }
 
