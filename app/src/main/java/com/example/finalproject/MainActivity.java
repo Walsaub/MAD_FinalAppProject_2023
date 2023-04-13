@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.database.Cursor;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -31,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
+    ValorantDatabase db = new ValorantDatabase(this);
+
+    //content tier
+    HashMap<String, String> allTiers = new HashMap<String, String>();
+    //array list to hold all the maps
+    static ArrayList<Map> allMaps = new ArrayList<Map>();
+
     //create an in-class function to retrieve all weapons
     static ArrayList<Weapon> allWeapons = new ArrayList<Weapon>();
     public static ArrayList<Weapon> getAllWeapons(){
@@ -43,20 +51,16 @@ public class MainActivity extends AppCompatActivity {
         return allSkins;
     }
 
-    //content tier
-    HashMap<String, String> allTiers = new HashMap<String, String>();
-    //array list to hold all the maps
-    static ArrayList<Map> allMaps = new ArrayList<Map>();
-
     /**
      * @author wissam al saub
      * @date 4/13/2023
      * @return returns an array list with every map retrieved
      */
-    public static ArrayList<Map> getAllMaps(){return allMaps;}
-
     //array list to hold all the agents
     static ArrayList<Agent> allAgents = new ArrayList<Agent>();
+    public static ArrayList<Map> getAllMaps(){return allMaps;}
+
+
 
     /**
      * @author wissam al saub
@@ -69,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /** AGENTS **/
         /**
          * @author wissam al saub
          * @date 4/13/2023
@@ -139,101 +144,106 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        /** WEAPONS **/
         //1. Request JSON data
         String weaponsURL = "https://valorant-api.com/v1/weapons/";
 
-        JsonObjectRequest gunRequest = new JsonObjectRequest(Request.Method.GET, weaponsURL, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try{
-                    //2. allDATA is a collection of EVERY gun
-                    JSONArray allDATA = response.getJSONArray("data");
+        //if database is empty
+        if(db.getAllWeapons().isEmpty()) {
+            JsonObjectRequest gunRequest = new JsonObjectRequest(Request.Method.GET, weaponsURL, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        //2. allDATA is a collection of EVERY gun
+                        JSONArray allDATA = response.getJSONArray("data");
 
-                    //3. gunData is all data for each specific gun (18 total)
-                    JSONObject[] gunData = new JSONObject[allDATA.length()];
+                        //3. gunData is all data for each specific gun (18 total)
+                        JSONObject[] gunData = new JSONObject[allDATA.length()];
 
-                    //collect JSONObject data for each gun
-                    for(int i = 0; i < allDATA.length(); i++){
+                        //collect JSONObject data for each gun
+                        for (int i = 0; i < allDATA.length(); i++) {
 
-                        gunData[i] = allDATA.getJSONObject(i);
+                            gunData[i] = allDATA.getJSONObject(i);
 
-                        /** CHECK IF SHOPDATA EXISTS **/
-                        int price;
-                        String category;
-                        JSONObject shopData;
-                        if(gunData[i].isNull("shopData")){
-                            price = 0;
-                            category = "Melee";
-                        }else{
-                            shopData = gunData[i].getJSONObject("shopData");
-                            price = shopData.getInt("cost");
-                            category = shopData.getString("category");
-                        }
-
-
-                        /** CHECK IF WEAPONDATA EXISTS **/
-                        Double fireRate;
-                        int magazineSize;
-                        Double reloadTime;
-                        Double zooMultplier;
-
-                        JSONObject weaponData;
-                        JSONObject adsData;
-
-
-                        //check weaponData first
-                        if(gunData[i].isNull("weaponStats")){
-                            //if it doesn't have a gun, it won't have gun-related stats.
-                            fireRate = 0.0;
-                            magazineSize = 0;
-                            reloadTime = 0.0;
-                            zooMultplier = 0.0;
-                        }else{  //if gun data DOES exist
-                            //if adsStats is NOT null, read the data and put inside weaponData
-                            weaponData = gunData[i].getJSONObject("weaponStats");
-
-                            fireRate = weaponData.getDouble("fireRate");
-                            magazineSize = weaponData.getInt("magazineSize");
-                            reloadTime = weaponData.getDouble("reloadTimeSeconds");
-
-                            //now, we need to check if ads data exists inside of specific weapon.
-                            if(weaponData.isNull("adsStats")){
-                                zooMultplier = 0.0;
-                            }else{
-                                //if adsStats is NOT null, read the data and put inside adsData
-                                adsData = weaponData.getJSONObject("adsStats");
-                                zooMultplier =  adsData.getDouble("zoomMultiplier");
+                            /** CHECK IF SHOPDATA EXISTS **/
+                            int price;
+                            String category;
+                            JSONObject shopData;
+                            if (gunData[i].isNull("shopData")) {
+                                price = 0;
+                                category = "Melee";
+                            } else {
+                                shopData = gunData[i].getJSONObject("shopData");
+                                price = shopData.getInt("cost");
+                                category = shopData.getString("category");
                             }
+
+
+                            /** CHECK IF WEAPONDATA EXISTS **/
+                            Double fireRate;
+                            int magazineSize;
+                            Double reloadTime;
+                            Double zooMultplier;
+
+                            JSONObject weaponData;
+                            JSONObject adsData;
+
+
+                            //check weaponData first
+                            if (gunData[i].isNull("weaponStats")) {
+                                //if it doesn't have a gun, it won't have gun-related stats.
+                                fireRate = 0.0;
+                                magazineSize = 0;
+                                reloadTime = 0.0;
+                                zooMultplier = 0.0;
+                            } else {  //if gun data DOES exist
+                                //if adsStats is NOT null, read the data and put inside weaponData
+                                weaponData = gunData[i].getJSONObject("weaponStats");
+
+                                fireRate = weaponData.getDouble("fireRate");
+                                magazineSize = weaponData.getInt("magazineSize");
+                                reloadTime = weaponData.getDouble("reloadTimeSeconds");
+
+                                //now, we need to check if ads data exists inside of specific weapon.
+                                if (weaponData.isNull("adsStats")) {
+                                    zooMultplier = 0.0;
+                                } else {
+                                    //if adsStats is NOT null, read the data and put inside adsData
+                                    adsData = weaponData.getJSONObject("adsStats");
+                                    zooMultplier = adsData.getDouble("zoomMultiplier");
+                                }
+                            }
+
+
+                            //when this weapon is initialized, we generate a variable for the time it was generated.
+                            Weapon w = new Weapon(
+                                    gunData[i].getString("displayName"),
+                                    category,
+                                    gunData[i].getString("displayIcon"),
+                                    price,
+                                    fireRate,
+                                    magazineSize,
+                                    reloadTime,
+                                    zooMultplier
+                            );
+                            db.addWeapon(w);
+
                         }
 
-
-
-                        Weapon w = new Weapon(
-                                gunData[i].getString("displayName"),
-                                category,
-                                gunData[i].getString("displayIcon"),
-                                price,
-                                fireRate,
-                                magazineSize,
-                                reloadTime,
-                                zooMultplier
-                        );
-                        allWeapons.add(w);
-
+                    } catch (Exception e) {
+                        System.out.println("Failed to collect JSON data.");
                     }
-
-                }catch(Exception e) {
-                    System.out.println("Failed to collect JSON data.");
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
-            }
-        });
-        Volley.newRequestQueue(this).add(gunRequest);
+                }
+            });
+            Volley.newRequestQueue(this).add(gunRequest);
+        }
 
+        /** SKINS **/
         //JSON object request #2 ~ Skins
         String skinsURL = "https://valorant-api.com/v1/weapons/skins";
         String contenttiersURL = "https://valorant-api.com/v1/contenttiers";
@@ -267,7 +277,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         Volley.newRequestQueue(this).add(tierRequest);
-
 
         JsonObjectRequest skinRequest = new JsonObjectRequest(Request.Method.GET, skinsURL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -312,6 +321,7 @@ public class MainActivity extends AppCompatActivity {
         });
         Volley.newRequestQueue(this).add(skinRequest);
 
+        /** MAPS **/
         /**
          * @author wissam al saub
          * @date 4/13/2023

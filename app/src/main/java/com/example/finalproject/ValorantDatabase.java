@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import com.example.finalproject.pojo.Weapon;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class ValorantDatabase extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
@@ -23,11 +24,22 @@ public class ValorantDatabase extends SQLiteOpenHelper {
     public static final String COLUMN_WEAPON_NAME = "name";
     public static final String COLUMN_WEAPON_CATEGORY = "category";
     public static final String COLUMN_WEAPON_DISPLAYICON = "displayIcon";
+    public static final String COLUMN_WEAPON_COST = "cost";
+    public static final String COLUMN_WEAPON_FIRERATE = "firerate";
+    public static final String COLUMN_WEAPON_MAGAZINESIZE = "size";
+    public static final String COLUMN_WEAPON_RELOADTIME = "reloadTime";
+    public static final String COLUMN_WEAPON_ZOOMMULTIPLIER = "zoomMultiplier";
+
     public static final String CREATE_WEAPONS_TABLE = "CREATE TABLE " +
-            TABLE_WEAPON + "(" + COLUMN_WEAPON_ID + " INTEGER PRIMARY KEY,"
+            TABLE_WEAPON + "(" + COLUMN_WEAPON_ID + " INTEGER PRIMARY KEY, "
             + COLUMN_WEAPON_NAME + " TEXT, "
-            + COLUMN_WEAPON_CATEGORY + "TEXT, "
-            + COLUMN_WEAPON_DISPLAYICON + " TEXT)";
+            + COLUMN_WEAPON_CATEGORY + " TEXT, "
+            + COLUMN_WEAPON_DISPLAYICON + " TEXT, "
+            + COLUMN_WEAPON_COST + " INTEGER, "
+            + COLUMN_WEAPON_FIRERATE + " REAL, "
+            + COLUMN_WEAPON_MAGAZINESIZE + " INTEGER, "
+            + COLUMN_WEAPON_RELOADTIME + " REAL, "
+            + COLUMN_WEAPON_ZOOMMULTIPLIER + " REAL)";
 
     public ValorantDatabase(@Nullable Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -48,6 +60,11 @@ public class ValorantDatabase extends SQLiteOpenHelper {
         values.put(COLUMN_WEAPON_NAME, weapon.getName());
         values.put(COLUMN_WEAPON_CATEGORY, weapon.getCategory());
         values.put(COLUMN_WEAPON_DISPLAYICON, weapon.getDisplayIcon());
+        values.put(COLUMN_WEAPON_COST, weapon.getWeaponCost());
+        values.put(COLUMN_WEAPON_FIRERATE, weapon.getFireRate());
+        values.put(COLUMN_WEAPON_MAGAZINESIZE, weapon.getMagazineSize());
+        values.put(COLUMN_WEAPON_RELOADTIME, weapon.getReloadTime());
+        values.put(COLUMN_WEAPON_ZOOMMULTIPLIER, weapon.getZoomMultipier());
         db.insert(TABLE_WEAPON, null, values);
         db.close();
         Log.d("SQL", "Weapon Added");
@@ -57,21 +74,21 @@ public class ValorantDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db  = this.getReadableDatabase();
         Weapon weapon = null;
         Cursor cursor = db.query(TABLE_WEAPON,
-                new String[]{COLUMN_WEAPON_ID, COLUMN_WEAPON_NAME, COLUMN_WEAPON_CATEGORY, COLUMN_WEAPON_DISPLAYICON},
+                new String[]{COLUMN_WEAPON_ID, COLUMN_WEAPON_NAME, COLUMN_WEAPON_CATEGORY, COLUMN_WEAPON_DISPLAYICON, COLUMN_WEAPON_COST, COLUMN_WEAPON_FIRERATE, COLUMN_WEAPON_MAGAZINESIZE, COLUMN_WEAPON_RELOADTIME, COLUMN_WEAPON_ZOOMMULTIPLIER},
                 COLUMN_WEAPON_ID + "= ?"
                 , new String[]{String.valueOf(id)},
                 null, null, null);
         if(cursor.moveToFirst()){ //Checking that we have a value and select it to be read
+
             weapon = new Weapon(
-                    cursor.getInt(0),
+                    cursor.getString(0),
                     cursor.getString(1),
                     cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getInt(4),
-                    cursor.getDouble(5),
-                    cursor.getInt(6),
-                    cursor.getDouble(7),
-                    cursor.getDouble(8));
+                    cursor.getInt(3),
+                    cursor.getDouble(4),
+                    cursor.getInt(5),
+                    cursor.getDouble(6),
+                    cursor.getDouble(7));
         }
         db.close();
         return weapon;
@@ -79,6 +96,7 @@ public class ValorantDatabase extends SQLiteOpenHelper {
 
     public ArrayList<Weapon> getAllWeapons(){
         SQLiteDatabase db = this.getReadableDatabase();
+
         ArrayList<Weapon> weapons = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_WEAPON, null);
         Log.d("SQL", "Weapon Table: " + cursor.getCount() + " records");
