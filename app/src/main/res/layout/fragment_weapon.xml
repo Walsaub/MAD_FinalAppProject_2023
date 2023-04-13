@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/weaponDisplay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/weapon_image_height"
         android:layout_weight="3"
         android:adjustViewBounds="true"
         tools:src="@tools:sample/avatars" />

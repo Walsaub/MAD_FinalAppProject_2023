@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.finalproject.MainActivity;
 import com.example.finalproject.R;
 import com.example.finalproject.pojo.Weapon;
 
@@ -76,7 +77,7 @@ public class AgentsFragment extends Fragment {
 //        agentsList.add(new Weapon("Kay/o", "Initiator", "null"));
 //        agentsList.add(new Weapon("Sova", "Initiator", "null"));
         //create a new custom list view adapter and assign it to AgentsListView
-        AgentsCustomAdapter adapter = new AgentsCustomAdapter(agentsList);
+        AgentsCustomAdapter adapter = new AgentsCustomAdapter(MainActivity.getAllAgents());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
