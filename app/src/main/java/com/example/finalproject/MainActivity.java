@@ -36,21 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
     //content tier
     HashMap<String, String> allTiers = new HashMap<String, String>();
-    //array list to hold all the maps
-    static ArrayList<Map> allMaps = new ArrayList<Map>();
-
-    //create an in-class function to retrieve all weapons
-    static ArrayList<Weapon> allWeapons = new ArrayList<Weapon>();
-    public static ArrayList<Weapon> getAllWeapons(){
-        return allWeapons;
-    }
-
-    //skins
-    static ArrayList<Skin> allSkins = new ArrayList<Skin>();
-    public static ArrayList<Skin> getAllSkins(){
-        return allSkins;
-    }
-
     /**
      * @author wissam al saub
      * @date 4/13/2023
@@ -58,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
      */
     //array list to hold all the agents
     static ArrayList<Agent> allAgents = new ArrayList<Agent>();
-    public static ArrayList<Map> getAllMaps(){return allMaps;}
 
 
 
@@ -301,7 +285,6 @@ public class MainActivity extends AppCompatActivity {
                                     skinData[i].getString("displayName"),
                                     tier
                             );
-                            allSkins.add(s);
                             db.addSkin(s);
                         }
 
@@ -328,7 +311,8 @@ public class MainActivity extends AppCompatActivity {
          */
         String mapURL = "https://valorant-api.com/v1/maps";
 
-        JsonObjectRequest mapsRequest = new JsonObjectRequest(Request.Method.GET, mapURL, null, new Response.Listener<JSONObject>() {
+        if (db.getAllMaps().isEmpty()){
+            JsonObjectRequest mapsRequest = new JsonObjectRequest(Request.Method.GET, mapURL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -342,20 +326,21 @@ public class MainActivity extends AppCompatActivity {
                                 maps.getJSONObject(i).getString("displayName"),
                                 maps.getJSONObject(i).getString("coordinates")
                         );
-                        allMaps.add(map);
+                        db.addMAp(map);
                     }
 
                 } catch (Exception e) {
                     System.out.println("Failed to collect the map's JSON data");
                 }
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
-            }
-        });
-        Volley.newRequestQueue(this).add(mapsRequest);
+                }
+            });
+            Volley.newRequestQueue(this).add(mapsRequest);
+        }
 
     }
 

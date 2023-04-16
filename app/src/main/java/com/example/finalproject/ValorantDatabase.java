@@ -9,6 +9,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.example.finalproject.pojo.Map;
 import com.example.finalproject.pojo.Skin;
 import com.example.finalproject.pojo.Weapon;
 
@@ -41,6 +42,7 @@ public class ValorantDatabase extends SQLiteOpenHelper {
             + COLUMN_WEAPON_MAGAZINESIZE + " INTEGER, "
             + COLUMN_WEAPON_RELOADTIME + " REAL, "
             + COLUMN_WEAPON_ZOOMMULTIPLIER + " REAL)";
+    //skins table
 
     public static final String TABLE_SKIN = "skin";
     public static final String COLUMN_SKIN_ID = "id";
@@ -54,7 +56,25 @@ public class ValorantDatabase extends SQLiteOpenHelper {
             + COLUMN_SKIN_IMAGE + " TEXT, "
             + COLUMN_SKIN_NAME + " TEXT, "
             + COLUMN_SKIN_TIER + " TEXT, "
-            + COLUMN_SKIN_SKINPRICE + " BLOB)";
+            + COLUMN_SKIN_SKINPRICE + " INTEGER)";
+
+    /* Maps table */
+
+    //table name
+    public static final String TABLE_MAP = "map";
+    //column names
+    public static final String COLUMN_MAP_ID = "id";
+    public static final String COLUMN_MAP_IMAGE = "mapImage";
+    public static final String COLUMN_MAP_NAME = "mapName";
+    public static final String COLUMN_MAP_COORDINATES = "mapCoordinates";
+    public static final String COLUMN_MAP_DESCRIPTION = "mapDescription";
+    //The query to build the Map table
+    public static final String CREATE_MAP_TABLE = "CREATE TABLE " +
+            TABLE_MAP + "(" + COLUMN_MAP_ID + " INTEGER PRIMARY KEY, "
+            + COLUMN_MAP_IMAGE + " TEXT, "
+            + COLUMN_MAP_NAME + " TEXT, "
+            +COLUMN_MAP_COORDINATES + " TEXT, "
+            + COLUMN_MAP_DESCRIPTION + " TEXT)";
 
     public ValorantDatabase(@Nullable Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -65,6 +85,7 @@ public class ValorantDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_WEAPONS_TABLE);
         db.execSQL(CREATE_SKINS_TABLE);
+        db.execSQL(CREATE_MAP_TABLE);
     }
 
     @Override
@@ -92,10 +113,27 @@ public class ValorantDatabase extends SQLiteOpenHelper {
         values.put(COLUMN_SKIN_IMAGE, skin.getSkinImage());
         values.put(COLUMN_SKIN_NAME, skin.getSkinName());
         values.put(COLUMN_SKIN_TIER, skin.getSkinTier());
-        values.put(COLUMN_SKIN_SKINPRICE, skin.getSkinPrice());
+        values.put(COLUMN_SKIN_SKINPRICE, skin.getDBSkinPrice());
         db.insert(TABLE_SKIN, null, values);
         db.close();
         Log.d("SQL", "Skin Added");
+    }
+
+    /**
+     * @author wissam al saub
+     * @date 4/16/2023
+     * @param map
+     * @description adds a new map to the map table
+     */
+    public void addMAp(Map map){
+        SQLiteDatabase db =  this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_MAP_IMAGE, map.getMapImage());
+        values.put(COLUMN_MAP_NAME, map.getMapName());
+        values.put(COLUMN_MAP_COORDINATES, map.getMapCoordinates());
+        values.put(COLUMN_MAP_DESCRIPTION, map.getMapDescription());
+        db.insert(TABLE_MAP, null, values);
+        db.close();
     }
 
     public Weapon getWeapon(int id){
@@ -120,6 +158,31 @@ public class ValorantDatabase extends SQLiteOpenHelper {
         }
         db.close();
         return weapon;
+    }
+
+    /**
+     * @author wissam al saub
+     * @date 4/16/2023
+     * @param id
+     * @return returns a Map object created from the map record that we got from the map table
+     */
+    public Map getMap(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Map map = null;
+        Cursor cursor = db.query(TABLE_MAP,
+                new String[]{COLUMN_MAP_ID, COLUMN_MAP_IMAGE, COLUMN_MAP_NAME, COLUMN_MAP_COORDINATES, COLUMN_MAP_DESCRIPTION},
+                COLUMN_MAP_ID + "= ?",
+                new String[]{String.valueOf(id)}, null, null, null);
+        if (cursor.moveToFirst()){
+            map = new Map(
+                   cursor.getInt(0),
+                   cursor.getString(1),
+                   cursor.getString(2),
+                   cursor.getString(3)
+            );
+        }
+        db.close();
+        return map;
     }
 
     public ArrayList<Weapon> getAllWeapons(){
@@ -159,6 +222,27 @@ public class ValorantDatabase extends SQLiteOpenHelper {
         }
         db.close();
         return skins;
+    }
+
+    /**
+     * @author wissam al saub
+     * @date 4/16/2023
+     * @return returns an array list with all the map records returned from the database
+     */
+    public ArrayList<Map> getAllMaps(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Map> maps = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_MAP, null);
+        while (cursor.moveToNext()){
+            maps.add(new Map(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3)
+            ));
+        }
+        db.close();
+        return maps;
     }
 
 

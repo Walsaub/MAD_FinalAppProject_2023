@@ -169,6 +169,14 @@ public class Skin implements Parcelable {
     public String getSkinPrice() {
         return ""+skinPrice;
     }
+    /**
+     * @author wissam al saub
+     * @date 4/16/2023
+     * @return returns an integer value of the skin's price retrieved from the api so we can store it in the database
+     */
+    public int getDBSkinPrice() {
+        return skinPrice;
+    }
 
     /**
      * @author wissam al saub

@@ -70,11 +70,15 @@ public class SkinsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // separated the view from the return statement
         View view = inflater.inflate(R.layout.fragment_skins, container, false);
+        //get the valorant database
+        ValorantDatabase db = new ValorantDatabase(getContext());
 
         //create an array list of skin objects
-        ArrayList<Skin> skinsList = new ValorantDatabase(getContext()).getAllSkins();
-        //assign the skins list Recycler View to a variable
+        ArrayList<Skin> skinsList = db.getAllSkins();
 
+        //close the connection to the Valorant database
+        db.close();
+        //assign the skins list Recycler View to a variable
         RecyclerView recyclerView = view.findViewById(R.id.skinsList);
         //add new skin objects to the array
 //        skinsList.add(new Weapon("Elder Flame", "It is dragon themed", "null"));
