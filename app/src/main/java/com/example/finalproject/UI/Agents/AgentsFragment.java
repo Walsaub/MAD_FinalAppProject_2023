@@ -80,7 +80,7 @@ public class AgentsFragment extends Fragment {
         //assign the agents list Recycler View to a variable
         RecyclerView recyclerView = view.findViewById(R.id.agentsList);
         //create a new custom list view adapter and assign it to AgentsListView
-        AgentsCustomAdapter adapter = new AgentsCustomAdapter(MainActivity.getAllAgents());
+        AgentsCustomAdapter adapter = new AgentsCustomAdapter(agentsList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

@@ -36,22 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
     //content tier
     HashMap<String, String> allTiers = new HashMap<String, String>();
-    /**
-     * @author wissam al saub
-     * @date 4/13/2023
-     * @return returns an array list with every map retrieved
-     */
-    //array list to hold all the agents
-    static ArrayList<Agent> allAgents = new ArrayList<Agent>();
-
-
-
-    /**
-     * @author wissam al saub
-     * @date 4/13/2023
-     * @return returns an array list with every agent retrieved
-     */
-    public static ArrayList<Agent> getAllAgents(){return allAgents;}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                                         agentAbilities.getJSONObject(3).getString("displayIcon"),
                                         agentAbilities.getJSONObject(3).getString("description")
                                 );
-                                allAgents.add(agent);
+                                db.addAgent(agent);
                             }
 
                         }
