@@ -5,4 +5,5 @@
     <string name="title_map">Maps</string>
     <string name="title_weapon">Weapons</string>
     <string name="title_skin">Skins</string>
+    <string name="description_placeholder">Click on the ability icon to know more about it</string>
 </resources>
