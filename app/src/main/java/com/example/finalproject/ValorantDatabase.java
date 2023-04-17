@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import com.example.finalproject.pojo.Agent;
 import com.example.finalproject.pojo.Map;
 import com.example.finalproject.pojo.Skin;
+import com.example.finalproject.pojo.Tier;
 import com.example.finalproject.pojo.Weapon;
 
 import java.util.ArrayList;
@@ -58,6 +59,20 @@ public class ValorantDatabase extends SQLiteOpenHelper {
             + COLUMN_SKIN_NAME + " TEXT, "
             + COLUMN_SKIN_TIER + " TEXT, "
             + COLUMN_SKIN_SKINPRICE + " INTEGER)";
+
+    /* Tiers table */
+
+    //table name
+    public static final String TABLE_TIER = "tier";
+    //column names
+    public static final String COLUMN_TIER_ID = "id";
+    public static final String COLUMN_TIER_UUID = "uuid";
+    public static final String COLUMN_TIER_NAME = "name";
+    //The query to build the tier table
+    public static final String CREATE_TIER_TABLE = "CREATE TABLE " +
+            TABLE_TIER + "(" + COLUMN_TIER_ID + " INTEGER PRIMARY KEY, "
+            + COLUMN_TIER_UUID + " TEXT, "
+            + COLUMN_TIER_NAME + " TEXT)";
 
     /* Maps table */
 
@@ -126,6 +141,7 @@ public class ValorantDatabase extends SQLiteOpenHelper {
         db.execSQL(CREATE_SKINS_TABLE);
         db.execSQL(CREATE_MAP_TABLE);
         db.execSQL(CREATE_AGENT_TABLE);
+        db.execSQL(CREATE_TIER_TABLE);
     }
 
     @Override
@@ -161,11 +177,26 @@ public class ValorantDatabase extends SQLiteOpenHelper {
 
     /**
      * @author wissam al saub
+     * @date 4/17/2023
+     * @param tier
+     * @description adds a new tier to the tier table
+     */
+    public void addTier(Tier tier){
+        SQLiteDatabase db =  this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TIER_UUID, tier.getUuid());
+        values.put(COLUMN_TIER_NAME, tier.getTier());
+        db.insert(TABLE_TIER, null, values);
+        db.close();
+    }
+
+    /**
+     * @author wissam al saub
      * @date 4/16/2023
      * @param map
      * @description adds a new map to the map table
      */
-    public void addMAp(Map map){
+    public void addMap(Map map){
         SQLiteDatabase db =  this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_MAP_IMAGE, map.getMapImage());
@@ -225,6 +256,50 @@ public class ValorantDatabase extends SQLiteOpenHelper {
         }
         db.close();
         return weapon;
+    }
+
+    /**
+     * @author wissam al saub
+     * @date 4/17/2023
+     * @param id
+     * @return returns a Tier object created from the tier record that we got from the tier table
+     */
+    public Tier getTier(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Tier tier = null;
+        Cursor cursor = db.query(TABLE_TIER,
+                new String[]{COLUMN_TIER_ID, COLUMN_TIER_UUID, COLUMN_TIER_NAME},
+                COLUMN_TIER_ID + "= ?",
+                new String[]{String.valueOf(id)}, null, null, null);
+        if (cursor.moveToFirst()){
+            tier = new Tier(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2)
+            );
+        }
+        db.close();
+        return tier;
+    }
+
+    /**
+     * @author wissam al saub
+     * @date 4/17/2023
+     * @param uuid
+     * @return returns a Tier name by its uuid value
+     */
+    public String getTierByUUID(String uuid){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String tier = null;
+        Cursor cursor = db.query(TABLE_TIER,
+                new String[]{COLUMN_TIER_ID, COLUMN_TIER_UUID, COLUMN_TIER_NAME},
+                COLUMN_TIER_UUID + "= ?",
+                new String[]{String.valueOf(uuid)}, null, null, null);
+        if (cursor.moveToFirst()){
+            tier = cursor.getString(2);
+        }
+        db.close();
+        return tier;
     }
 
     /**
@@ -324,6 +399,26 @@ public class ValorantDatabase extends SQLiteOpenHelper {
         }
         db.close();
         return skins;
+    }
+
+    /**
+     * @author wissam al saub
+     * @date 4/17/2023
+     * @return returns an array list with all the tier records returned from the database
+     */
+    public ArrayList<Tier> getAllTiers(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Tier> tiers = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_TIER, null);
+        while (cursor.moveToNext()){
+            tiers.add(new Tier(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2)
+            ));
+        }
+        db.close();
+        return tiers;
     }
 
     /**

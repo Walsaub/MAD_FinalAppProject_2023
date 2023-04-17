@@ -11,6 +11,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.finalproject.pojo.Agent;
 import com.example.finalproject.pojo.Map;
 import com.example.finalproject.pojo.Skin;
+import com.example.finalproject.pojo.Tier;
 import com.example.finalproject.pojo.Weapon;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -32,14 +33,16 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    ValorantDatabase db = new ValorantDatabase(this);
+    ValorantDatabase db;
 
     //content tier
-    HashMap<String, String> allTiers = new HashMap<String, String>();
+    ArrayList<Tier> allTiers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //initialize valorant Database
+        db = new ValorantDatabase(this);
 
         /** AGENTS **/
         /**
@@ -216,32 +219,38 @@ public class MainActivity extends AppCompatActivity {
         String skinsURL = "https://valorant-api.com/v1/weapons/skins";
         String contenttiersURL = "https://valorant-api.com/v1/contenttiers";
 
+        if (db.getAllTiers().isEmpty()){
+            JsonObjectRequest tierRequest = new JsonObjectRequest(Request.Method.GET, contenttiersURL, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        //2. allDATA is a collection of EVERY gun
+                        JSONArray allDATA = response.getJSONArray("data");
+                        //3. gunData is all data for each specific gun (18 total)
+                        JSONObject[] tierData = new JSONObject[allDATA.length()];
 
-        JsonObjectRequest tierRequest = new JsonObjectRequest(Request.Method.GET, contenttiersURL, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    //2. allDATA is a collection of EVERY gun
-                    JSONArray allDATA = response.getJSONArray("data");
-                    //3. gunData is all data for each specific gun (18 total)
-                    JSONObject[] tierData = new JSONObject[allDATA.length()];
-
-                    //collect JSONObject data for each gun
-                    for (int i = 0; i < allDATA.length(); i++) {
-                        tierData[i] = allDATA.getJSONObject(i); //retrieve individual skin data
-                        allTiers.put(tierData[i].getString("uuid"), tierData[i].getString("devName"));
+                        //collect JSONObject data for each gun
+                        for (int i = 0; i < allDATA.length(); i++) {
+                            tierData[i] = allDATA.getJSONObject(i); //retrieve individual skin data
+                            Tier tier = new Tier(
+                                    tierData[i].getString("uuid"),
+                                    tierData[i].getString("devName")
+                            );
+                            db.addTier(tier);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Failed to collect JSON data.");
                     }
-                } catch (Exception e) {
-                    System.out.println("Failed to collect JSON data.");
+                }}, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
                 }
-            }}, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-        Volley.newRequestQueue(this).add(tierRequest);
+            });
+            Volley.newRequestQueue(this).add(tierRequest);
+        }
 
         if(db.getAllSkins().isEmpty()) {
+            allTiers = db.getAllTiers();
             JsonObjectRequest skinRequest = new JsonObjectRequest(Request.Method.GET, skinsURL, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
@@ -258,19 +267,16 @@ public class MainActivity extends AppCompatActivity {
                             JSONArray chromasData = skinData[i].getJSONArray("chromas");
                             JSONObject x = chromasData.getJSONObject(0);
 
-                            String tier = "";
-                            if(skinData[i].isNull("contentTierUuid")){
-                                tier = "Select";
-                            }else{
-                                tier = allTiers.get(skinData[i].getString("contentTierUuid"));
+                            if(!skinData[i].isNull("contentTierUuid")){
+                                Skin s = new Skin(
+                                        x.getString("fullRender"),
+                                        skinData[i].getString("displayName"),
+                                        db.getTierByUUID(skinData[i].getString("contentTierUuid"))
+                                );
+                                db.addSkin(s);
                             }
 
-                            Skin s = new Skin(
-                                    x.getString("fullRender"),
-                                    skinData[i].getString("displayName"),
-                                    tier
-                            );
-                            db.addSkin(s);
+
                         }
 
                     }catch(Exception e) {
@@ -311,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
                                 maps.getJSONObject(i).getString("displayName"),
                                 maps.getJSONObject(i).getString("coordinates")
                         );
-                        db.addMAp(map);
+                        db.addMap(map);
                     }
 
                 } catch (Exception e) {
@@ -327,6 +333,8 @@ public class MainActivity extends AppCompatActivity {
             Volley.newRequestQueue(this).add(mapsRequest);
         }
 
+        //close the database
+        db.close();
     }
 
 }
