@@ -65,54 +65,55 @@ public class MainActivity extends AppCompatActivity {
          * requesting the agent's data from Valorant API
          */
         String agentURL = "https://valorant-api.com/v1/agents";
+        if (db.getAllAgents().isEmpty()){
+            JsonObjectRequest agentsRequest = new JsonObjectRequest(Request.Method.GET, agentURL, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        //get all the agents and store them in a json array
+                        JSONArray agents = response.getJSONArray("data");
 
-        JsonObjectRequest agentsRequest = new JsonObjectRequest(Request.Method.GET, agentURL, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    //get all the agents and store them in a json array
-                    JSONArray agents = response.getJSONArray("data");
+                        //loop through the json array to create a new agent object from the fetched data
+                        for (int i = 0; i < agents.length(); i++){
+                            //check if the agent is in the game yet
+                            if (agents.getJSONObject(i).getBoolean("isPlayableCharacter")){
+                                //get the agent's role json object that is inside the agent's json object
+                                JSONObject agentRole = agents.getJSONObject(i).getJSONObject("role");
+                                //get the agent's abilities json array that is inside the agent's json object
+                                JSONArray agentAbilities = agents.getJSONObject(i).getJSONArray("abilities");
+                                Agent agent = new Agent(
+                                        agents.getJSONObject(i).getString("displayName"),
+                                        agentRole.getString("displayName"),
+                                        agents.getJSONObject(i).getString("fullPortrait"),
+                                        agentRole.getString("displayIcon"),
+                                        agents.getJSONObject(i).getString("description"),
+                                        agents.getJSONObject(i).getString("displayIconSmall"),
+                                        agentAbilities.getJSONObject(0).getString("displayIcon"),
+                                        agentAbilities.getJSONObject(0).getString("description"),
+                                        agentAbilities.getJSONObject(1).getString("displayIcon"),
+                                        agentAbilities.getJSONObject(1).getString("description"),
+                                        agentAbilities.getJSONObject(2).getString("displayIcon"),
+                                        agentAbilities.getJSONObject(2).getString("description"),
+                                        agentAbilities.getJSONObject(3).getString("displayIcon"),
+                                        agentAbilities.getJSONObject(3).getString("description")
+                                );
+                                allAgents.add(agent);
+                            }
 
-                    //loop through the json array to create a new agent object from the fetched data
-                    for (int i = 0; i < agents.length(); i++){
-                        //check if the agent is in the game yet
-                        if (agents.getJSONObject(i).getBoolean("isPlayableCharacter")){
-                            //get the agent's role json object that is inside the agent's json object
-                            JSONObject agentRole = agents.getJSONObject(i).getJSONObject("role");
-                            //get the agent's abilities json array that is inside the agent's json object
-                            JSONArray agentAbilities = agents.getJSONObject(i).getJSONArray("abilities");
-                            Agent agent = new Agent(
-                                    agents.getJSONObject(i).getString("displayName"),
-                                    agentRole.getString("displayName"),
-                                    agents.getJSONObject(i).getString("fullPortrait"),
-                                    agentRole.getString("displayIcon"),
-                                    agents.getJSONObject(i).getString("description"),
-                                    agents.getJSONObject(i).getString("displayIconSmall"),
-                                    agentAbilities.getJSONObject(0).getString("displayIcon"),
-                                    agentAbilities.getJSONObject(0).getString("description"),
-                                    agentAbilities.getJSONObject(1).getString("displayIcon"),
-                                    agentAbilities.getJSONObject(1).getString("description"),
-                                    agentAbilities.getJSONObject(2).getString("displayIcon"),
-                                    agentAbilities.getJSONObject(2).getString("description"),
-                                    agentAbilities.getJSONObject(3).getString("displayIcon"),
-                                    agentAbilities.getJSONObject(3).getString("description")
-                            );
-                            allAgents.add(agent);
                         }
 
+                    } catch (Exception e) {
+                        System.out.println("Failed to collect the agent's JSON data");
                     }
-
-                } catch (Exception e) {
-                    System.out.println("Failed to collect the agent's JSON data");
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
-            }
-        });
-        Volley.newRequestQueue(this).add(agentsRequest);
+                }
+            });
+            Volley.newRequestQueue(this).add(agentsRequest);
+        }
 
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());

@@ -9,6 +9,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.example.finalproject.pojo.Agent;
 import com.example.finalproject.pojo.Map;
 import com.example.finalproject.pojo.Skin;
 import com.example.finalproject.pojo.Weapon;
@@ -76,6 +77,44 @@ public class ValorantDatabase extends SQLiteOpenHelper {
             +COLUMN_MAP_COORDINATES + " TEXT, "
             + COLUMN_MAP_DESCRIPTION + " TEXT)";
 
+    /* Agents Table */
+
+    //table name
+    public static final String TABLE_AGENT = "agent";
+    //column names
+    public static final String COLUMN_AGENT_ID = "id";
+    public static final String COLUMN_AGENT_NAME = "agentName";
+    public static final String COLUMN_AGENT_ROLE = "agentRole";
+    public static final String COLUMN_AGENT_IMAGE = "agentImage";
+    public static final String COLUMN_AGENT_ROLE_IMAGE = "roleImage";
+    public static final String COLUMN_AGENT_DESCRIPTION = "agentDescription";
+    public static final String COLUMN_AGENT_ICON = "agentIcon";
+    public static final String COLUMN_AGENT_FIRST_ABILITY_ICON = "firstAbilityIcon";
+    public static final String COLUMN_AGENT_FIRST_ABILITY_DESCRIPTION = "firstAbilityDescription";
+    public static final String COLUMN_AGENT_SECOND_ABILITY_ICON = "secondAbilityIcon";
+    public static final String COLUMN_AGENT_SECOND_ABILITY_DESCRIPTION = "secondAbilityDescription";
+    public static final String COLUMN_AGENT_THIRD_ABILITY_ICON = "thirdAbilityIcon";
+    public static final String COLUMN_AGENT_THIRD_ABILITY_DESCRIPTION = "thirdAbilityDescription";
+    public static final String COLUMN_AGENT_FOURTH_ABILITY_ICON = "fourthAbilityIcon";
+    public static final String COLUMN_AGENT_FOURTH_ABILITY_DESCRIPTION = "fourthAbilityDescription";
+    //The query to build the Agent table
+    public static final String CREATE_AGENT_TABLE = "CREATE TABLE " +
+            TABLE_AGENT + "(" + COLUMN_AGENT_ID + " INTEGER PRIMARY KEY, "
+            + COLUMN_AGENT_NAME + " TEXT, "
+            + COLUMN_AGENT_ROLE + " TEXT, "
+            + COLUMN_AGENT_IMAGE + " TEXT, "
+            + COLUMN_AGENT_ROLE_IMAGE + " TEXT, "
+            + COLUMN_AGENT_DESCRIPTION + " TEXT, "
+            + COLUMN_AGENT_ICON + " TEXT, "
+            + COLUMN_AGENT_FIRST_ABILITY_ICON + " TEXT, "
+            + COLUMN_AGENT_FIRST_ABILITY_DESCRIPTION + " TEXT, "
+            + COLUMN_AGENT_SECOND_ABILITY_ICON + " TEXT, "
+            + COLUMN_AGENT_SECOND_ABILITY_DESCRIPTION + " TEXT, "
+            + COLUMN_AGENT_THIRD_ABILITY_ICON + " TEXT, "
+            + COLUMN_AGENT_THIRD_ABILITY_DESCRIPTION + " TEXT, "
+            + COLUMN_AGENT_FOURTH_ABILITY_ICON + " TEXT, "
+            + COLUMN_AGENT_FOURTH_ABILITY_DESCRIPTION + " TEXT)";
+
     public ValorantDatabase(@Nullable Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -86,6 +125,7 @@ public class ValorantDatabase extends SQLiteOpenHelper {
         db.execSQL(CREATE_WEAPONS_TABLE);
         db.execSQL(CREATE_SKINS_TABLE);
         db.execSQL(CREATE_MAP_TABLE);
+        db.execSQL(CREATE_AGENT_TABLE);
     }
 
     @Override
@@ -136,6 +176,33 @@ public class ValorantDatabase extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * @author wissam al saub
+     * @date 4/17/2023
+     * @param agent
+     * @description adds a new agent to the agent table
+     */
+    public void addAgent(Agent agent){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_AGENT_NAME, agent.getAgentName());
+        values.put(COLUMN_AGENT_ROLE, agent.getAgentRole());
+        values.put(COLUMN_AGENT_IMAGE, agent.getAgentImage());
+        values.put(COLUMN_AGENT_ROLE_IMAGE, agent.getRoleImage());
+        values.put(COLUMN_AGENT_DESCRIPTION, agent.getAgentDescription());
+        values.put(COLUMN_AGENT_ICON, agent.getAgentIcon());
+        values.put(COLUMN_AGENT_FIRST_ABILITY_ICON, agent.getFirstAbilityIcon());
+        values.put(COLUMN_AGENT_FIRST_ABILITY_DESCRIPTION, agent.getFirstAbilityDescription());
+        values.put(COLUMN_AGENT_SECOND_ABILITY_ICON, agent.getSecondAbilityIcon());
+        values.put(COLUMN_AGENT_SECOND_ABILITY_DESCRIPTION, agent.getSecondAbilityDescription());
+        values.put(COLUMN_AGENT_THIRD_ABILITY_ICON, agent.getThirdAbilityIcon());
+        values.put(COLUMN_AGENT_THIRD_ABILITY_DESCRIPTION, agent.getThirdAbilityDescription());
+        values.put(COLUMN_AGENT_FOURTH_ABILITY_ICON, agent.getFourthAbilityIcon());
+        values.put(COLUMN_AGENT_FOURTH_ABILITY_DESCRIPTION, agent.getFourthAbilityDescription());
+        db.insert(TABLE_AGENT, null, values);
+        db.close();
+    }
+
     public Weapon getWeapon(int id){
         SQLiteDatabase db  = this.getReadableDatabase();
         Weapon weapon = null;
@@ -183,6 +250,41 @@ public class ValorantDatabase extends SQLiteOpenHelper {
         }
         db.close();
         return map;
+    }
+    /**
+     * @author wissam al saub
+     * @date 4/17/2023
+     * @param id
+     * @return returns an agent object created from the agent record that we got from the agent table
+     */
+    public Agent getAgent(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Agent agent = null;
+        Cursor cursor = db.query(TABLE_AGENT,
+                new String[]{COLUMN_AGENT_ID, COLUMN_AGENT_NAME, COLUMN_AGENT_ROLE, COLUMN_AGENT_IMAGE, COLUMN_AGENT_ROLE_IMAGE, COLUMN_AGENT_DESCRIPTION, COLUMN_AGENT_ICON, COLUMN_AGENT_FIRST_ABILITY_ICON, COLUMN_AGENT_FIRST_ABILITY_DESCRIPTION, COLUMN_AGENT_SECOND_ABILITY_ICON, COLUMN_AGENT_SECOND_ABILITY_DESCRIPTION, COLUMN_AGENT_THIRD_ABILITY_ICON, COLUMN_AGENT_THIRD_ABILITY_DESCRIPTION, COLUMN_AGENT_FOURTH_ABILITY_ICON, COLUMN_AGENT_FOURTH_ABILITY_DESCRIPTION},
+                COLUMN_AGENT_ID + "= ?",
+                new String[]{String.valueOf(id)}, null, null, null);
+        if (cursor.moveToFirst()){
+            agent = new Agent(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(5),
+                    cursor.getString(6),
+                    cursor.getString(7),
+                    cursor.getString(8),
+                    cursor.getString(9),
+                    cursor.getString(10),
+                    cursor.getString(11),
+                    cursor.getString(12),
+                    cursor.getString(13),
+                    cursor.getString(14)
+            );
+        }
+        db.close();
+        return agent;
     }
 
     public ArrayList<Weapon> getAllWeapons(){
@@ -243,6 +345,33 @@ public class ValorantDatabase extends SQLiteOpenHelper {
         }
         db.close();
         return maps;
+    }
+
+    public ArrayList<Agent> getAllAgents(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Agent> agents = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_AGENT, null);
+        while (cursor.moveToNext()){
+            agents.add(new Agent(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(5),
+                    cursor.getString(6),
+                    cursor.getString(7),
+                    cursor.getString(8),
+                    cursor.getString(9),
+                    cursor.getString(10),
+                    cursor.getString(11),
+                    cursor.getString(12),
+                    cursor.getString(13),
+                    cursor.getString(14)
+            ));
+        }
+        db.close();
+        return agents;
     }
 
 
