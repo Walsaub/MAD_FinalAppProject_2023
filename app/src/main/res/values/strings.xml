@@ -32,9 +32,22 @@
     <string name="animation_summary_on">Now there will be animation when loading the cards</string>
     <string name="animation_summary_off">Now there will be no animation when loading the cards</string>
 
-
     <!-- Currency Preferences -->
     <string name="currency_title">Show price currency</string>
     <string name="currency_summary_on">Now the skin prices will be in Canadian dollars</string>
     <string name="currency_summary_off">Now the skin prices will be in Valorant points</string>
+
+    <!--credits-->
+    <string name="credits">Credits</string>
+    <string name="wissam">Wissam Al Saub</string>
+    <string name="dalton">Dalton Virtue</string>
+    <string name="cai">Câi Filiault</string>
+    <string name="author">Authors:</string>
+    <string name="instructor">Instructor:</string>
+    <string name="api">This app uses Valorant API (https://valorant-api.com/) to retrieve all the data related to the game Valorant.</string>
+    <string name="api_button">Check Valorant API</string>
+    <string name="valorant_button">Check Game Site</string>
+    <string name="valorant_api_site">https://valorant-api.com/</string>
+    <string name="valorant_site">https://playvalorant.com/</string>
+
 </resources>

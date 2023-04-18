@@ -82,4 +82,17 @@
     <!--margins-->
     <dimen name="contact_button_margin">10dp</dimen>
 
+    <!--
+    credits layout constraints and sizes
+    -->
+    <!--margins-->
+    <dimen name="credits_heading_top_margin">20dp</dimen>
+    <dimen name="credits_names_margin">10dp</dimen>
+    <dimen name="credits_api_margin">20dp</dimen>
+    <dimen name="credits_buttons_margin">15dp</dimen>
+    <!--text size-->
+    <dimen name="credits_heading_text_size">26sp</dimen>
+    <dimen name="credits_names_text_size">23sp</dimen>
+
+
 </resources>

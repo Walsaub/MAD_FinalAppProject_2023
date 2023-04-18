@@ -1,8 +1,10 @@
-package com.example.finalproject;
+package com.example.finalproject.UI.TopMenu;
 
 import android.os.Bundle;
 
 import androidx.preference.PreferenceFragmentCompat;
+
+import com.example.finalproject.R;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 

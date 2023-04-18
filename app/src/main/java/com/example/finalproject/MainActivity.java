@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_agents, R.id.navigation_maps, R.id.navigation_weapons, R.id.navigation_skins, R.id.detailedAgentFragment, R.id.contact_us, R.id.settings)
+                R.id.navigation_agents, R.id.navigation_maps, R.id.navigation_weapons, R.id.navigation_skins, R.id.detailedAgentFragment, R.id.contact_us, R.id.settings, R.id.credits)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -367,6 +367,9 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
             case R.id.settings:
                 navController.navigate(R.id.settings);
+                return super.onOptionsItemSelected(item);
+            case R.id.credits:
+                navController.navigate(R.id.credits);
                 return super.onOptionsItemSelected(item);
             default:
                 return super.onOptionsItemSelected(item);

@@ -1,4 +1,4 @@
-package com.example.finalproject.UI.ContactUs;
+package com.example.finalproject.UI.TopMenu;
 
 import android.content.Intent;
 import android.net.Uri;
