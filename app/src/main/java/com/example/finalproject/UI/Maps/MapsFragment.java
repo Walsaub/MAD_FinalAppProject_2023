@@ -67,7 +67,7 @@ public class MapsFragment extends Fragment {
         // linked the viewPager2 to a property
         ViewPager2 viewPager2 = view.findViewById(R.id.mapViewPager);
         // set the viewPager2 adapter
-        viewPager2.setAdapter(new CustomViewPagerAdapter(getActivity()));
+        viewPager2.setAdapter(new CustomViewPagerAdapter(getActivity(),getContext()));
         viewPager2.setPageTransformer(new ZoomOutPageTransformer());
         return view;
     }

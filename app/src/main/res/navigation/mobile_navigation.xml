@@ -33,4 +33,18 @@
         android:name="com.example.finalproject.UI.Agents.DetailedAgentFragment"
         android:label="@string/title_agent_detailed"
         tools:layout="@layout/fragment_detailed_agent" />
+    <fragment
+        android:id="@+id/contact_us"
+        android:name="com.example.finalproject.UI.TopMenu.ContactUsFragment"
+        android:label="@string/contact_us"
+        tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.example.finalproject.UI.TopMenu.SettingsFragment"
+        android:label="@string/settings" />
+    <fragment
+        android:id="@+id/credits"
+        android:name="com.example.finalproject.UI.TopMenu.CreditsFragment"
+        android:label="@string/credits"
+        tools:layout="@layout/fragment_credits" />
 </navigation>

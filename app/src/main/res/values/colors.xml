@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="red_200">#E09393</color>
+    <color name="red_200">#812F2F</color>
     <color name="red_500">#D83A30</color>
     <color name="red_700">#B92829</color>
     <color name="grey_200">#E7E7E7</color>
     <color name="grey_700">#575757</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="background">#2A606A</color>
+    <color name="card_view_background">#2A606A</color>
+    <color name="detailed_text_color">#1A284F</color>
+    <color name="agent_image_background">#6A000000</color>
+    <color name="background">#D5C4A1</color>
+    <color name="highlight">#80AED6DC</color>
+    <color name="switch_background">#BF13B569</color>
 </resources>

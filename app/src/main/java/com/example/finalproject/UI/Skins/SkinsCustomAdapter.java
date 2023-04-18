@@ -1,5 +1,6 @@
 package com.example.finalproject.UI.Skins;
 
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalproject.R;
@@ -21,6 +23,8 @@ public class SkinsCustomAdapter extends RecyclerView.Adapter<SkinsCustomAdapter.
     //arraylist to hold all the skins data
     private ArrayList<Skin> skins;
 
+    private SharedPreferences sharedPreferences;
+
     //custom adapter constructor
     public SkinsCustomAdapter(ArrayList<Skin> skins){
         this.skins = skins;
@@ -31,7 +35,8 @@ public class SkinsCustomAdapter extends RecyclerView.Adapter<SkinsCustomAdapter.
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.skin_view, parent, false);
-
+        //get the shared preference from the settings menu
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
         return new CustomViewHolder(view);
     }
 
@@ -41,7 +46,11 @@ public class SkinsCustomAdapter extends RecyclerView.Adapter<SkinsCustomAdapter.
         Skin skin = skins.get(position);
         holder.skinName.setText(skin.getSkinName());
         holder.skinCategory.setText(skin.getSkinTier());
-        holder.skinPrice.setText(skin.getSkinPrice());
+        if (sharedPreferences.getBoolean("currency_select", true)){
+            holder.skinPrice.setText(skin.getSkinPriceInDollars());
+        } else {
+            holder.skinPrice.setText(skin.getSkinPrice());
+        }
         Picasso.get().load(skin.getSkinImage()).into(holder.skinImage);
 
     }

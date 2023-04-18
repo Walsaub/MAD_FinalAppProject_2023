@@ -26,6 +26,8 @@ import java.util.ArrayList;
 
 public class CustomWeaponsViewPagerAdapter extends FragmentStateAdapter {
     ValorantDatabase valorantDatabase;
+
+    ArrayList<Weapon> allWeapons;
     //we need to collect the FragmentActivity because it is a FRAGMENT and
     //fragments have the getApplicationContext() property which allows us to get the context
     //which we use to use Volley.
@@ -34,23 +36,27 @@ public class CustomWeaponsViewPagerAdapter extends FragmentStateAdapter {
 
         //1. initialize valorant Database
         valorantDatabase = new ValorantDatabase(context);
+        //initialize the maps array lis
+        allWeapons = valorantDatabase.getAllWeapons();
+        //close the connection to the Valorant database
+        valorantDatabase.close();
     }
 
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        for(int i = 0; i < valorantDatabase.getAllWeapons().size(); i++){
+        for(int i = 0; i < allWeapons.size(); i++){
             if(position == i){
                 return WeaponFragment.newInstance(
-                        valorantDatabase.getAllWeapons().get(i).getName(),
-                        valorantDatabase.getAllWeapons().get(i).getCategory(),
-                        valorantDatabase.getAllWeapons().get(i).getDisplayIcon(),
-                        valorantDatabase.getAllWeapons().get(i).getWeaponCost(),
-                        valorantDatabase.getAllWeapons().get(i).getFireRate(),
-                        valorantDatabase.getAllWeapons().get(i).getMagazineSize(),
-                        valorantDatabase.getAllWeapons().get(i).getReloadTime(),
-                        valorantDatabase.getAllWeapons().get(i).getZoomMultipier());
+                        allWeapons.get(i).getName(),
+                        allWeapons.get(i).getCategory(),
+                        allWeapons.get(i).getDisplayIcon(),
+                        allWeapons.get(i).getWeaponCost(),
+                        allWeapons.get(i).getFireRate(),
+                        allWeapons.get(i).getMagazineSize(),
+                        allWeapons.get(i).getReloadTime(),
+                        allWeapons.get(i).getZoomMultipier());
 
             }
         }
@@ -58,6 +64,6 @@ public class CustomWeaponsViewPagerAdapter extends FragmentStateAdapter {
     }
     @Override
     public int getItemCount() {
-        return valorantDatabase.getAllWeapons().size();
+        return allWeapons.size();
     }
 }

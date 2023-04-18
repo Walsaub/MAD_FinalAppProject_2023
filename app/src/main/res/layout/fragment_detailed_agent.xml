@@ -47,6 +47,7 @@
         android:layout_marginTop="@dimen/detailed_agent_description_top_margin"
         android:text="TextView"
         android:textAlignment="center"
+        android:textColor="@color/detailed_text_color"
         android:textSize="@dimen/detailed_agent_text_size"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,14 +56,16 @@
 
     <TextView
         android:id="@+id/abilityDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/ability_description_bottom_margin"
-        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ability_description_height"
+        android:layout_marginBottom="16dp"
+        android:scrollbars="vertical"
+        android:text="@string/description_placeholder"
         android:textAlignment="center"
-        android:textSize="@dimen/detailed_agent_text_size"
+        android:textColor="@color/detailed_text_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
