@@ -57,13 +57,13 @@
         android:id="@+id/abilityDescription"
         android:layout_width="match_parent"
         android:layout_height="@dimen/ability_description_height"
-        android:layout_marginBottom="@dimen/ability_description_bottom_margin"
+        android:layout_marginBottom="16dp"
         android:scrollbars="vertical"
         android:text="@string/description_placeholder"
         android:textAlignment="center"
-        android:textSize="@dimen/detailed_agent_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout

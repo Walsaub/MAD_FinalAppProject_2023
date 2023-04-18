@@ -1,10 +1,13 @@
 package com.example.finalproject.UI.Agents;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
 import android.text.method.ScrollingMovementMethod;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,8 +73,11 @@ public class DetailedAgentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // separated the view from the return statement
         View view = inflater.inflate(R.layout.fragment_detailed_agent, container, false);
-        // get all the views in the layout file
 
+        //get the shared preference from the settings menu
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+
+        // get all the views in the layout file
         ImageView agentImage = view.findViewById(R.id.agentFullImage);
         TextView agentName = view.findViewById(R.id.detailedName);
         ImageView agentRole = view.findViewById(R.id.detailedRoleIcon);
@@ -83,6 +89,15 @@ public class DetailedAgentFragment extends Fragment {
         ImageView fourthAbility = view.findViewById(R.id.fourthAbility);
         //add the ability to scroll through the description text view
         abilityDescription.setMovementMethod(new ScrollingMovementMethod());
+
+        //change the ability description text size depending on the value returned from the settings
+        if (sharedPreferences.getString("ability_text_size", "").equals("small")){
+            abilityDescription.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.detailed_ability_text_size_small));
+        } else if (sharedPreferences.getString("ability_text_size", "").equals("medium")){
+            abilityDescription.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.detailed_ability_text_size_medium));
+        }else {
+            abilityDescription.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.detailed_ability_text_size_large));
+        }
 
         if (getArguments() != null){
             agent = getArguments().getParcelable(AGENT);

@@ -22,6 +22,10 @@
     <!-- Preference Titles -->
     <string name="currency">Currency</string>
     <string name="animation">Animation</string>
+    <string name="text_size">Text size</string>
+
+    <!-- Animation Preferences -->
+    <string name="ability_text_size_title">Ability description text size</string>
 
     <!-- Animation Preferences -->
     <string name="animation_title">Toggle the animation on/off</string>

@@ -50,11 +50,14 @@
     <dimen name="detailed_agent_name_top_margin">10dp</dimen>
     <dimen name="detailed_agent_description_top_margin">25dp</dimen>
     <dimen name="abilities_margin">10dp</dimen>
-    <dimen name="ability_description_bottom_margin">20dp</dimen>
-    <dimen name="ability_description_height">100sp</dimen>
+    <dimen name="ability_description_bottom_margin">10dp</dimen>
+    <dimen name="ability_description_height">75sp</dimen>
     <!--text size-->
     <dimen name="detailed_agent_name_text_size">25sp</dimen>
     <dimen name="detailed_agent_text_size">16sp</dimen>
+    <dimen name="detailed_ability_text_size_small">16sp</dimen>
+    <dimen name="detailed_ability_text_size_medium">20sp</dimen>
+    <dimen name="detailed_ability_text_size_large">24sp</dimen>
     <!--image size-->
     <dimen name="detailed_agent_role_image_size">24sp</dimen>
     <dimen name="detailed_ability_image_size">50sp</dimen>

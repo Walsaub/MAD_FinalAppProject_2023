@@ -364,8 +364,10 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.contact_us:
                 navController.navigate(R.id.contact_us);
+                return super.onOptionsItemSelected(item);
             case R.id.settings:
                 navController.navigate(R.id.settings);
+                return super.onOptionsItemSelected(item);
             default:
                 return super.onOptionsItemSelected(item);
         }
