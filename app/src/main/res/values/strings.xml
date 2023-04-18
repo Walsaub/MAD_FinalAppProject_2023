@@ -6,4 +6,14 @@
     <string name="title_weapon">Weapons</string>
     <string name="title_skin">Skins</string>
     <string name="description_placeholder">Click on the ability icon to know more about it</string>
+    <!--contact us-->
+    <string name="contact_us">Contact us</string>
+    <string name="call_us">call us</string>
+    <string name="message_us">message us</string>
+    <string name="email_us">email us</string>
+    <string name="email">wissam.alsaub01@stclairconnect.ca</string>
+    <string name="subject">Question</string>
+    <string name="email_body">I would like to ask about </string>
+    <string name="phone_number">2269614099</string>
+    <string name="sms_body">I would like to ask about </string>
 </resources>

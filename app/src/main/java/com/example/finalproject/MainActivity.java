@@ -2,6 +2,8 @@ package com.example.finalproject;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -15,6 +17,7 @@ import com.example.finalproject.pojo.Tier;
 import com.example.finalproject.pojo.Weapon;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -110,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_agents, R.id.navigation_maps, R.id.navigation_weapons, R.id.navigation_skins, R.id.detailedAgentFragment)
+                R.id.navigation_agents, R.id.navigation_maps, R.id.navigation_weapons, R.id.navigation_skins, R.id.detailedAgentFragment, R.id.contact_us)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -337,4 +340,33 @@ public class MainActivity extends AppCompatActivity {
         db.close();
     }
 
+    /**
+     * @author wissam al saub
+     * @date 4/18/2023
+     * @param menu
+     * @description add the menu to the top right
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    /**
+     * @author wissam al saub
+     * @date 4/18/2023
+     * @param item
+     * @description handle the navigation when the top menu items clicked
+     */
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        switch (item.getItemId()){
+            case R.id.contact_us:
+                navController.navigate(R.id.contact_us);
+                return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

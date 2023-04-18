@@ -33,4 +33,9 @@
         android:name="com.example.finalproject.UI.Agents.DetailedAgentFragment"
         android:label="@string/title_agent_detailed"
         tools:layout="@layout/fragment_detailed_agent" />
+    <fragment
+        android:id="@+id/contact_us"
+        android:name="com.example.finalproject.UI.ContactUs.ContactUsFragment"
+        android:label="@string/contact_us"
+        tools:layout="@layout/fragment_contact_us" />
 </navigation>

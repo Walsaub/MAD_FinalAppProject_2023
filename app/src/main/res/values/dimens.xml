@@ -73,4 +73,10 @@
     <!--skin card view corner size-->
     <dimen name="skin_card_view_corner_size">7dp</dimen>
 
+    <!--
+    contact layout constraints and sizes
+    -->
+    <!--margins-->
+    <dimen name="contact_button_margin">10dp</dimen>
+
 </resources>
