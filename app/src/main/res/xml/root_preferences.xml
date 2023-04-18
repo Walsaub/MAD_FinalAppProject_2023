@@ -1,6 +1,6 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/messages_header">
+   <!-- <PreferenceCategory app:title="@string/messages_header">
 
         <EditTextPreference
             app:key="signature"
@@ -15,7 +15,7 @@
             app:title="@string/reply_title"
             app:useSimpleSummaryProvider="true" />
 
-    </PreferenceCategory>
+    </PreferenceCategory>-->
 
     <PreferenceCategory app:title="@string/currency">
 
@@ -25,6 +25,18 @@
             app:summaryOff="@string/currency_summary_off"
             app:summaryOn="@string/currency_summary_on"
             app:title="@string/currency_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/animation">
+
+
+        <SwitchPreferenceCompat
+            app:key="animation_toggle"
+            app:defaultValue="true"
+            app:summaryOff="@string/animation_summary_off"
+            app:summaryOn="@string/animation_summary_on"
+            app:title="@string/animation_title" />
 
     </PreferenceCategory>
 

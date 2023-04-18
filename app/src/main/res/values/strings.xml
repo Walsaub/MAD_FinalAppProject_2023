@@ -18,14 +18,15 @@
     <string name="sms_body">I would like to ask about </string>
     <!--settings-->
     <string name="settings">Settings</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-    <string name="currency">Currency</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <!-- Preference Titles -->
+    <string name="currency">Currency</string>
+    <string name="animation">Animation</string>
+
+    <!-- Animation Preferences -->
+    <string name="animation_title">Toggle the animation on/off</string>
+    <string name="animation_summary_on">Now there will be animation when loading the cards</string>
+    <string name="animation_summary_off">Now there will be no animation when loading the cards</string>
 
 
     <!-- Currency Preferences -->

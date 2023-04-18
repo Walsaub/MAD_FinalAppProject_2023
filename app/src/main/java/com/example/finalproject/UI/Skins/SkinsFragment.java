@@ -1,8 +1,10 @@
 package com.example.finalproject.UI.Skins;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
 import com.example.finalproject.MainActivity;
 import com.example.finalproject.R;
@@ -71,6 +76,10 @@ public class SkinsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // separated the view from the return statement
         View view = inflater.inflate(R.layout.fragment_skins, container, false);
+
+        //get the shared preference from the settings menu
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+
         //get the valorant database
         ValorantDatabase db = new ValorantDatabase(getContext());
 
@@ -81,12 +90,23 @@ public class SkinsFragment extends Fragment {
         db.close();
         //assign the skins list Recycler View to a variable
         RecyclerView recyclerView = view.findViewById(R.id.skinsList);
-        //add new skin objects to the array
-//        skinsList.add(new Weapon("Elder Flame", "It is dragon themed", "null"));
-//        skinsList.add(new Weapon("Oni", "It is Oni (a ghost) themed", "null"));
+
+        //toggle the animation on/off depending on the value returned from the settings menu
+        if (sharedPreferences.getBoolean("animation_toggle", true)){
+            // Load the animation resource file
+            Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.enter_top_left_with_scale);
+
+            // Create a LayoutAnimationController object and set its animation properties
+            LayoutAnimationController layoutAnimationController = new LayoutAnimationController(anim);
+            layoutAnimationController.setDelay(0.2f);
+
+            // Set the LayoutAnimationController on the RecyclerView
+            recyclerView.setLayoutAnimation(layoutAnimationController);
+        }else {
+            recyclerView.setLayoutAnimation(null);
+        }
+
         //create a new custom list view adapter and assign it to SkinsListView
-
-
         SkinsCustomAdapter adapter = new SkinsCustomAdapter(skinsList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
