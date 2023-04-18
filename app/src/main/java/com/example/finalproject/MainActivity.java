@@ -1,9 +1,13 @@
 package com.example.finalproject;
 
+import android.app.AlertDialog;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -18,13 +22,17 @@ import com.example.finalproject.pojo.Weapon;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.ListPreference;
 
 import com.example.finalproject.databinding.ActivityMainBinding;
+import com.google.android.material.card.MaterialCardView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -40,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
 
     //content tier
     ArrayList<Tier> allTiers = new ArrayList<>();
+
+    //boolean to check the the status of the fab button
+    private boolean check = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,15 +120,45 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_agents, R.id.navigation_maps, R.id.navigation_weapons, R.id.navigation_skins, R.id.detailedAgentFragment, R.id.contact_us, R.id.settings, R.id.credits)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        //handle the fab button click
+
+        binding.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //get the layout of the the fragment_skins
+                LinearLayout frameLayout = findViewById(R.id.skinsLinearLayout);
+                //update the variable
+                check = !check;
+                //change the background color depending on the check value
+                if (check){
+                    frameLayout.setBackgroundColor(getResources().getColor(R.color.background));
+                }else {
+                    frameLayout.setBackgroundColor(getResources().getColor(R.color.switch_background));
+                }
+            }
+        });
+
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+        //show and hide the fab button depending on the fragment that the user is viewing
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                if (destination.getId() == R.id.navigation_skins){
+                    binding.fab.show();
+                } else {
+                    binding.fab.hide();
+                }
+            }
+        });
 
         /** WEAPONS **/
         //1. Request JSON data

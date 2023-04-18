@@ -94,5 +94,10 @@
     <dimen name="credits_heading_text_size">26sp</dimen>
     <dimen name="credits_names_text_size">23sp</dimen>
 
+    <!--
+    fab layout constraints and sizes
+    -->
+    <!--margins-->
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

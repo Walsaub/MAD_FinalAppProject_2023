@@ -12,4 +12,5 @@
     <color name="agent_image_background">#6A000000</color>
     <color name="background">#D5C4A1</color>
     <color name="highlight">#80AED6DC</color>
+    <color name="switch_background">#BF13B569</color>
 </resources>
