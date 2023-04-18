@@ -10,6 +10,7 @@ public class Skin implements Parcelable {
     private String skinName;
     private String skinTier;
     private int skinPrice;
+    private int skinPriceInDollars;
 
     /**
      * @author wissam al saub
@@ -17,18 +18,38 @@ public class Skin implements Parcelable {
      * @param skinImage
      * @param skinName
      * @param skinTier
-     * @param skinPrice
      *
      * @date 4/6/2023
      * @description DB constructor for the skin class
      */
-    public Skin(int id, String skinImage, String skinName, String skinTier, int skinPrice) {
+    public Skin(int id, String skinImage, String skinName, String skinTier) {
         this.id = id;
         this.skinImage = skinImage;
         this.skinName = skinName;
         this.skinTier = skinTier;
-        this.skinPrice = skinPrice;
+        switch (this.skinTier){
+            case "Select":
+                this.skinPrice = 875;
+                break;
+            case "Deluxe":
+                this.skinPrice = 1275;
+                break;
+            case "Premium":
+                this.skinPrice = 1775;
+                break;
+            case "Ultra":
+                this.skinPrice = 2475;
+                break;
+            case "Exclusive":
+                this.skinPrice = 2500;
+                break;
+            default:
+                this.skinPrice = 0;
+                break;
+        }
+        this.skinPriceInDollars = (int) (skinPrice * 0.014);
     }
+
 
     /**
      * @author wissam al saub
@@ -36,16 +57,35 @@ public class Skin implements Parcelable {
      * @param skinImage
      * @param skinName
      * @param skinTier
-     * @param skinPrice
      *
      * @date 4/6/2023
      * @description regular constructor for the skin class
      */
-    public Skin(String skinImage, String skinName, String skinTier, int skinPrice) {
+    public Skin(String skinImage, String skinName, String skinTier) {
         this.skinImage = skinImage;
         this.skinName = skinName;
         this.skinTier = skinTier;
-        this.skinPrice = skinPrice;
+        switch (this.skinTier){
+            case "Select":
+                this.skinPrice = 875;
+                break;
+            case "Deluxe":
+                this.skinPrice = 1275;
+                break;
+            case "Premium":
+                this.skinPrice = 1775;
+                break;
+            case "Ultra":
+                this.skinPrice = 2475;
+                break;
+            case "Exclusive":
+                this.skinPrice = 2500;
+                break;
+            default:
+                this.skinPrice = 0;
+                break;
+        }
+        this.skinPriceInDollars = (int) (skinPrice * 0.014);
     }
 
     /**
@@ -130,7 +170,15 @@ public class Skin implements Parcelable {
      * @return returns the skin price
      */
     public String getSkinPrice() {
-        return ""+skinPrice;
+        return skinPrice + " VP";
+    }
+    /**
+     * @author wissam al saub
+     * @date 4/16/2023
+     * @return returns an integer value of the skin's price retrieved from the api so we can store it in the database
+     */
+    public int getDBSkinPrice() {
+        return skinPrice;
     }
 
     /**
@@ -141,6 +189,23 @@ public class Skin implements Parcelable {
      */
     public void setSkinPrice(int skinPrice) {
         this.skinPrice = skinPrice;
+    }
+    /**
+     * @author wissam al saub
+     * @date 4/18/2023
+     * @return returns the skin price in dollars
+     */
+    public String getSkinPriceInDollars() {
+        return "$" + skinPriceInDollars;
+    }
+    /**
+     * @author wissam al saub
+     * @date 4/18/2023
+     * @param skinPriceInDollars
+     * @description updates the skin price in dollars
+     */
+    public void setSkinPriceInDollars(int skinPriceInDollars) {
+        this.skinPriceInDollars = skinPriceInDollars;
     }
 
     @Override

@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.Weapons.WeaponFragment"
-    android:orientation="vertical">
+    android:background="@color/card_view_background"
+    android:orientation="vertical"
+    tools:context=".UI.Weapons.WeaponFragment">
 
 
     <ImageView
         android:id="@+id/weaponDisplay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/weapon_image_height"
         android:layout_weight="3"
         android:adjustViewBounds="true"
         tools:src="@tools:sample/avatars" />

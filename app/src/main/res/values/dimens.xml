@@ -8,7 +8,7 @@
     <!--margins-->
     <dimen name="map_name_top_margin">20dp</dimen>
     <dimen name="map_desc_top_margin">25dp</dimen>
-    <dimen name="map_coordinates_top_margin">120dp</dimen>
+    <dimen name="map_coordinates_bottom_margin">70dp</dimen>
     <!--text size-->
     <dimen name="map_name_text_size">40sp</dimen>
     <dimen name="map_desc_text_size">25sp</dimen>
@@ -23,6 +23,8 @@
     <!--text size-->
     <dimen name="weapon_name_text_size">25sp</dimen>
     <dimen name="weapon_status_text_size">20sp</dimen>
+    <!--image size-->
+    <dimen name="weapon_image_height">150sp</dimen>
 
     <!--
     agent layout constraints and sizes
@@ -34,16 +36,68 @@
     <!--text size-->
     <dimen name="agent_name_text_size">25sp</dimen>
     <dimen name="agent_role_text_size">20sp</dimen>
+    <!--image size-->
     <dimen name="agent_role_image_size">30sp</dimen>
+    <dimen name="agent_image_size">150sp</dimen>
+    <dimen name="custom_background_size">140dp</dimen>
+    <!--agent card view corner size-->
+    <dimen name="agent_card_view_corner_size">10dp</dimen>
+
+    <!--
+    detailed agent layout constraints and sizes
+    -->
+    <!--margins-->
+    <dimen name="detailed_agent_name_top_margin">10dp</dimen>
+    <dimen name="detailed_agent_description_top_margin">25dp</dimen>
+    <dimen name="abilities_margin">10dp</dimen>
+    <dimen name="ability_description_bottom_margin">10dp</dimen>
+    <dimen name="ability_description_height">75sp</dimen>
+    <!--text size-->
+    <dimen name="detailed_agent_name_text_size">25sp</dimen>
+    <dimen name="detailed_agent_text_size">16sp</dimen>
+    <dimen name="detailed_ability_text_size_small">16sp</dimen>
+    <dimen name="detailed_ability_text_size_medium">20sp</dimen>
+    <dimen name="detailed_ability_text_size_large">24sp</dimen>
+    <!--image size-->
+    <dimen name="detailed_agent_role_image_size">24sp</dimen>
+    <dimen name="detailed_ability_image_size">50sp</dimen>
 
     <!--
     skin layout constraints and sizes
     -->
+    <!--skin layout size-->
+    <dimen name="skin_layout_height">200dp</dimen>
     <!--margins-->
     <dimen name="skin_image_margin">5dp</dimen>
     <dimen name="skin_status_margin">15dp</dimen>
     <!--text size-->
     <dimen name="skin_name_text_size">25sp</dimen>
     <dimen name="skin_status_text_size">20sp</dimen>
+    <!--skin card view corner size-->
+    <dimen name="skin_card_view_corner_size">7dp</dimen>
+
+    <!--
+    contact layout constraints and sizes
+    -->
+    <!--margins-->
+    <dimen name="contact_button_margin">10dp</dimen>
+
+    <!--
+    credits layout constraints and sizes
+    -->
+    <!--margins-->
+    <dimen name="credits_heading_top_margin">20dp</dimen>
+    <dimen name="credits_names_margin">10dp</dimen>
+    <dimen name="credits_api_margin">20dp</dimen>
+    <dimen name="credits_buttons_margin">15dp</dimen>
+    <!--text size-->
+    <dimen name="credits_heading_text_size">26sp</dimen>
+    <dimen name="credits_names_text_size">23sp</dimen>
+
+    <!--
+    fab layout constraints and sizes
+    -->
+    <!--margins-->
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UI.TopMenu.CreditsFragment">
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/credits_heading_top_margin"
+        android:text="@string/author"
+        android:textSize="@dimen/credits_heading_text_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/wissam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/credits_names_margin"
+        android:text="@string/wissam"
+        android:textSize="@dimen/credits_names_text_size"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/dalton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/credits_names_margin"
+        android:text="@string/dalton"
+        android:textSize="@dimen/credits_names_text_size"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/instructor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/credits_heading_top_margin"
+        android:text="@string/instructor"
+        android:textSize="@dimen/credits_heading_text_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/cai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/credits_names_margin"
+        android:text="@string/cai"
+        android:textSize="@dimen/credits_names_text_size"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/valorantAPI"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/credits_api_margin"
+        android:text="@string/api"
+        android:textSize="@dimen/credits_names_text_size"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/apiButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/credits_buttons_margin"
+            android:layout_weight="1"
+            android:text="@string/api_button" />
+
+        <Button
+            android:id="@+id/valorantButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/credits_buttons_margin"
+            android:layout_weight="1"
+            android:text="@string/valorant_button" />
+    </LinearLayout>
+</LinearLayout>

@@ -6,11 +6,32 @@
         <item name="colorPrimaryVariant">@color/red_700</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/grey_200</item>
+        <item name="colorSecondary">@color/red_200</item>
         <item name="colorSecondaryVariant">@color/grey_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Widget.Agent.MaterialCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Agent.MaterialCardView</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.Agent.MaterialCardView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/agent_card_view_corner_size</item>
+    </style>
+
+    <style name="Widget.Skin.MaterialCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Skin.MaterialCardView</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.Skin.MaterialCardView" parent="">
+        <item name="cornerFamilyBottomRight">cut</item>
+        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerFamilyTopLeft">cut</item>
+        <item name="cornerSize">@dimen/skin_card_view_corner_size</item>
     </style>
 </resources>

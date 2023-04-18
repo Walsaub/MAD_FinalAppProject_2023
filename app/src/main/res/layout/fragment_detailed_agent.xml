@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.Agents.DetailedAgentFragment">
+
+
+    <ImageView
+        android:id="@+id/agentFullImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/detailedName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/detailed_agent_name_top_margin"
+        android:text="TextView"
+        android:textSize="@dimen/agent_name_text_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/detailedRoleIcon"
+        android:layout_width="@dimen/detailed_agent_role_image_size"
+        android:layout_height="@dimen/detailed_agent_role_image_size"
+        android:src="@drawable/ic_baseline_fire_extinguisher_24"
+        app:layout_constraintBottom_toBottomOf="@+id/detailedName"
+        app:layout_constraintEnd_toStartOf="@+id/detailedName"
+        app:layout_constraintTop_toTopOf="@+id/detailedName" />
+
+    <TextView
+        android:id="@+id/agentDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/detailed_agent_description_top_margin"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/detailed_text_color"
+        android:textSize="@dimen/detailed_agent_text_size"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailedName" />
+
+    <TextView
+        android:id="@+id/abilityDescription"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ability_description_height"
+        android:layout_marginBottom="16dp"
+        android:scrollbars="vertical"
+        android:text="@string/description_placeholder"
+        android:textAlignment="center"
+        android:textColor="@color/detailed_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/abilities_margin"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/abilityDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/firstAbility"
+            android:layout_width="@dimen/detailed_ability_image_size"
+            android:layout_height="@dimen/detailed_ability_image_size"
+            android:layout_margin="@dimen/abilities_margin"
+            android:src="@drawable/ic_baseline_map_24" />
+
+        <ImageView
+            android:id="@+id/secondAbility"
+            android:layout_width="@dimen/detailed_ability_image_size"
+            android:layout_height="@dimen/detailed_ability_image_size"
+            android:layout_margin="@dimen/abilities_margin"
+            android:src="@drawable/ic_baseline_map_24" />
+
+        <ImageView
+            android:id="@+id/thirdAbility"
+            android:layout_width="@dimen/detailed_ability_image_size"
+            android:layout_height="@dimen/detailed_ability_image_size"
+            android:layout_margin="@dimen/abilities_margin"
+            android:src="@drawable/ic_baseline_map_24" />
+
+        <ImageView
+            android:id="@+id/fourthAbility"
+            android:layout_width="@dimen/detailed_ability_image_size"
+            android:layout_height="@dimen/detailed_ability_image_size"
+            android:layout_margin="@dimen/abilities_margin"
+            android:src="@drawable/ic_baseline_map_24" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

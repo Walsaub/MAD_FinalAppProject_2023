@@ -1,0 +1,38 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+   <PreferenceCategory app:title="@string/text_size">
+
+        <ListPreference
+            app:defaultValue="small"
+            app:entries="@array/ability_text_size_entries"
+            app:entryValues="@array/ability_text_size_values"
+            app:key="ability_text_size"
+            app:title="@string/ability_text_size_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/currency">
+
+
+        <SwitchPreferenceCompat
+            app:key="currency_select"
+            app:summaryOff="@string/currency_summary_off"
+            app:summaryOn="@string/currency_summary_on"
+            app:title="@string/currency_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/animation">
+
+
+        <SwitchPreferenceCompat
+            app:key="animation_toggle"
+            app:defaultValue="true"
+            app:summaryOff="@string/animation_summary_off"
+            app:summaryOn="@string/animation_summary_on"
+            app:title="@string/animation_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

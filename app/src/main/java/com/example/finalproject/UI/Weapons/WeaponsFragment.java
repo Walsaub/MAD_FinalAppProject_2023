@@ -68,11 +68,10 @@ public class WeaponsFragment extends Fragment {
         // linked the viewPager2 to a property
         ViewPager2 viewPager2 = view.findViewById(R.id.weaponViewPager);
         // set the viewPager2 adapter
-        viewPager2.setAdapter(new CustomWeaponsViewPagerAdapter(getActivity()));
+        viewPager2.setAdapter(new CustomWeaponsViewPagerAdapter(getActivity(), getContext()));
         viewPager2.setPageTransformer(new DepthPageTransformer());
         return view;
     }
-
     @RequiresApi(21)
     public class DepthPageTransformer implements ViewPager2.PageTransformer {
         private static final float MIN_SCALE = 0.75f;

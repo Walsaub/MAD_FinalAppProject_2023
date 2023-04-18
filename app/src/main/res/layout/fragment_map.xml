@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.Maps.MapFragment"
-    >
+    android:background="@color/card_view_background"
+    tools:context=".UI.Maps.MapFragment">
 
 
     <ImageView
@@ -50,11 +50,11 @@
         android:id="@+id/mapCoordinates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/map_coordinates_top_margin"
+        android:layout_marginBottom="@dimen/map_coordinates_bottom_margin"
         android:text="TextView"
         android:textSize="@dimen/map_coordinates_text_size"
         android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/mapImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapDescription" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
