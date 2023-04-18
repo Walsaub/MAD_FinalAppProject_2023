@@ -38,4 +38,8 @@
         android:name="com.example.finalproject.UI.ContactUs.ContactUsFragment"
         android:label="@string/contact_us"
         tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.example.finalproject.SettingsFragment"
+        android:label="@string/settings" />
 </navigation>

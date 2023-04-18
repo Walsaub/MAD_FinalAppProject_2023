@@ -16,4 +16,20 @@
     <string name="email_body">I would like to ask about </string>
     <string name="phone_number">2269614099</string>
     <string name="sms_body">I would like to ask about </string>
+    <!--settings-->
+    <string name="settings">Settings</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+    <string name="currency">Currency</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+
+    <!-- Currency Preferences -->
+    <string name="currency_title">Show price currency</string>
+    <string name="currency_summary_on">Now the skin prices will be in Canadian dollars</string>
+    <string name="currency_summary_off">Now the skin prices will be in Valorant points</string>
 </resources>

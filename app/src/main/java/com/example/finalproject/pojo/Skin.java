@@ -10,6 +10,7 @@ public class Skin implements Parcelable {
     private String skinName;
     private String skinTier;
     private int skinPrice;
+    private int skinPriceInDollars;
 
     /**
      * @author wissam al saub
@@ -46,8 +47,9 @@ public class Skin implements Parcelable {
                 this.skinPrice = 0;
                 break;
         }
-
+        this.skinPriceInDollars = (int) (skinPrice * 0.014);
     }
+
 
     /**
      * @author wissam al saub
@@ -83,6 +85,7 @@ public class Skin implements Parcelable {
                 this.skinPrice = 0;
                 break;
         }
+        this.skinPriceInDollars = (int) (skinPrice * 0.014);
     }
 
     /**
@@ -167,7 +170,7 @@ public class Skin implements Parcelable {
      * @return returns the skin price
      */
     public String getSkinPrice() {
-        return ""+skinPrice;
+        return skinPrice + " VP";
     }
     /**
      * @author wissam al saub
@@ -186,6 +189,23 @@ public class Skin implements Parcelable {
      */
     public void setSkinPrice(int skinPrice) {
         this.skinPrice = skinPrice;
+    }
+    /**
+     * @author wissam al saub
+     * @date 4/18/2023
+     * @return returns the skin price in dollars
+     */
+    public String getSkinPriceInDollars() {
+        return "$" + skinPriceInDollars;
+    }
+    /**
+     * @author wissam al saub
+     * @date 4/18/2023
+     * @param skinPriceInDollars
+     * @description updates the skin price in dollars
+     */
+    public void setSkinPriceInDollars(int skinPriceInDollars) {
+        this.skinPriceInDollars = skinPriceInDollars;
     }
 
     @Override
